@@ -235,11 +235,7 @@ namespace Alta_LED.User_Control
                 this._isSelected = value;
                 if (value)
                 {
-                    this.OutLine.BorderBrush = Brushes.LightSeaGreen;
-                    if (this.selectEvent != null)
-                    {
-                        this.selectEvent(this, value);
-                    }
+                    this.OutLine.BorderBrush = Brushes.LightSeaGreen;                   
                 }
                 else
                 {
@@ -441,7 +437,18 @@ namespace Alta_LED.User_Control
 
         private void Selected(object sender, MouseButtonEventArgs e)
         {
-            this.isSelected = true;
+            if (Keyboard.Modifiers == ModifierKeys.Control)
+            {
+                this.isSelected = true;
+            }
+            else
+            {
+                this.isSelected = true;
+                if (this.selectEvent != null)
+                {
+                    this.selectEvent(this, this.isSelected);
+                }                
+            }
             this.layoutDraw.ReleaseMouseCapture();
         }
 
