@@ -1,0 +1,25 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing" x:Class="Alta_LED.User_Control.Border_Content" 
+             mc:Ignorable="d" 
+             xmlns:vlc="clr-namespace:Vlc.DotNet.Wpf;assembly=Vlc.DotNet.Wpf"
+             d:DesignHeight="300" d:DesignWidth="300" x:Name="usercontrol" >
+	<Canvas x:Name="Canvas_root" Width="{Binding Width, ElementName=usercontrol}" Height="{Binding Height, ElementName=usercontrol}" >
+        <vlc:VlcControl x:Name="videoPlayer"/>
+        <Rectangle x:Name="rect_00" Fill="White" Stroke="OrangeRed" StrokeThickness="1" Width="8" Height="8" Canvas.Left="0" Canvas.Top="0" MouseMove="resize_top_left" MouseLeftButtonDown="CaptrueMouse" MouseLeftButtonUp="EndResize"/>
+		<Rectangle x:Name="rect_02" Fill="White" Stroke="OrangeRed" StrokeThickness="1" Width="8" Height="8" Canvas.Right="0" MouseMove="resize_top_right" MouseLeftButtonDown="CaptrueMouse" MouseLeftButtonUp="EndResize"/>
+		<Rectangle x:Name="rect_22" Fill="White" Stroke="OrangeRed" StrokeThickness="1" Width="8" Height="8" Canvas.Right="0" Canvas.Bottom="0" MouseMove="resize_Bottom_Right" MouseLeftButtonDown="CaptrueMouse" MouseLeftButtonUp="EndResize"/>
+		<Rectangle x:Name="rect_20" Fill="White" Stroke="OrangeRed" StrokeThickness="1" Width="8" Height="8" Canvas.Left="0" Canvas.Bottom="0" MouseMove="resize_Bottom_Left" MouseLeftButtonDown="CaptrueMouse" MouseLeftButtonUp="EndResize"/>
+		<Rectangle x:Name="rect_10" Fill="White" Stroke="OrangeRed" StrokeThickness="1" Width="8" Height="8" Canvas.Left="0" Canvas.Top="146" MouseMove="resize_Center_Left" MouseLeftButtonDown="CaptrueMouse" MouseLeftButtonUp="EndResize"/>
+		<Rectangle x:Name="rect_12" Fill="White" Stroke="OrangeRed" StrokeThickness="1" Width="8" Height="8" Canvas.Right="0" Canvas.Top="146"  MouseMove="resize_Center_Right" MouseLeftButtonDown="CaptrueMouse" MouseLeftButtonUp="EndResize"/>
+		<Rectangle x:Name="rect_01" Fill="White" Stroke="OrangeRed" StrokeThickness="1" Width="8" Height="8" Canvas.Top="0" Canvas.Left="146" MouseMove="resize_Center_Top" MouseLeftButtonDown="CaptrueMouse" MouseLeftButtonUp="EndResize"/>
+		<Rectangle x:Name="rect_21" Fill="White" Stroke="OrangeRed" StrokeThickness="1" Width="8" Height="8" Canvas.Bottom="0" Canvas.Left="146" MouseMove="resize_Center_Bottom" MouseLeftButtonDown="CaptrueMouse" MouseLeftButtonUp="EndResize"/>
+        <Image x:Name="video"  Width="284" Height="284" Canvas.Left="8" Canvas.Top="8" Source="{Binding ElementName=videoPlayer, Path=VideoSource }" Stretch="Fill" MouseLeftButtonUp="Selected" MouseLeftButtonDown="BeginCaptrue" MouseMove="MoveItem"/>
+		<Border x:Name="OutLine" Width="284" Height="284" BorderBrush="OrangeRed" BorderThickness="1" Canvas.Left="8" Canvas.Top="8"  >
+            <Canvas x:Name="layoutDraw" VerticalAlignment="Top" HorizontalAlignment="Left" Background="Transparent" MouseLeftButtonUp="Selected" MouseLeftButtonDown="BeginCaptrue" MouseMove="MoveItem" Margin="1 1 0 0"/>
+        </Border>
+	</Canvas>
+</UserControl>

@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="Alta_LED.User_Control.Alta_Screen"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="400" x:Name="Screen" MinWidth="70" MinHeight="40">
+    <Canvas x:Name="canvas_root" Width="{Binding Width,ElementName=Screen}" Height="{Binding Height,ElementName=Screen}" Background="Gray" MouseLeftButtonDown="Screen_select" ClipToBounds="True">
+        <Border x:Name="outLine" BorderBrush="Black" BorderThickness="2" Width="{Binding ElementName=canvas_root, Path=Width}" Height="{Binding ElementName=canvas_root,Path=Height}" >
+            <Canvas x:Name="layoutMain" Width="{Binding ElementName=canvas_root, Path=Width}" Height="{Binding ElementName=canvas_root,Path=Height}" >
+                <Canvas x:Name="grid_fix" Width="{Binding ElementName=canvas_root, Path=Width}" Height="30" Background="Black" VerticalAlignment="Top" MouseLeftButtonDown="Window_PreviewDown" MouseMove="ScreenMove" MouseLeftButtonUp="EndMove" Margin="-2">
+                    <Button Canvas.Right="0"  Content="&#xf00d;" Foreground="Orange" Width="30" Style="{DynamicResource SimpleButtonFontIcon}" FontSize="18" Background="Black" Click="Screen_Remove" Height="{Binding Height, ElementName=grid_fix}" />
+                    <Button Content="&#xf065;" Grid.Column="1" Foreground="Orange" Background="Black" Style="{DynamicResource SimpleButtonFontIcon}" Height="{Binding Height, ElementName=grid_fix}" Canvas.Right="35" Width="30"/>
+                </Canvas>
+                <ResizeGrip x:Name="Gridresize" Canvas.Right="10" Canvas.Bottom="10" Cursor="SizeNWSE" MouseLeftButtonDown="Begin_Resize" MouseLeftButtonUp="End_Resize" MouseMove="Resize"/>
+            </Canvas>
+        </Border>
+    </Canvas>
+</UserControl>

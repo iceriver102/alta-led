@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="Alta_LED.User_Control.Grid_Content"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="219" d:DesignWidth="1600" xmlns:local="clr-namespace:Alta_LED">
+    <Grid Background="#FFE5E5E5" ClipToBounds="True" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Auto" >
+        <ListView x:Name="listBlock" Background="Transparent" SelectionChanged="listBlock_SelectionChanged">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+                       ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
+                       MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}"
+                       ItemHeight="{Binding (ListView.View).ItemHeight, RelativeSource={RelativeSource AncestorType=ListView}}" />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <local:ItemTemplate HorizontalAlignment="Stretch" Width="180" Height="120" VerticalAlignment="Center" Selected="Item_Selected" LoadTemplate="ItemTemplate_LoadTemplate"/>
+            <local:ItemTemplate HorizontalAlignment="Stretch" Width="180" Height="120" VerticalAlignment="Center" Selected="Item_Selected" LoadTemplate="ItemTemplate_LoadTemplate"/>
+            <local:ItemTemplate HorizontalAlignment="Stretch" Width="180" Height="120" VerticalAlignment="Center" Selected="Item_Selected" LoadTemplate="ItemTemplate_LoadTemplate"/>
+            <local:ItemTemplate HorizontalAlignment="Stretch" Width="180" Height="120" VerticalAlignment="Center" Selected="Item_Selected" LoadTemplate="ItemTemplate_LoadTemplate"/>
+            <local:ItemTemplate HorizontalAlignment="Stretch" Width="180" Height="120" VerticalAlignment="Center" Selected="Item_Selected" LoadTemplate="ItemTemplate_LoadTemplate"/>
+            <local:ItemTemplate HorizontalAlignment="Stretch" Width="180" Height="120" VerticalAlignment="Center" Selected="Item_Selected" LoadTemplate="ItemTemplate_LoadTemplate"/>
+            <local:ItemTemplate HorizontalAlignment="Stretch" Width="180" Height="120" VerticalAlignment="Center" Selected="Item_Selected" LoadTemplate="ItemTemplate_LoadTemplate"/>
+            <local:ItemTemplate HorizontalAlignment="Stretch" Width="180" Height="120" VerticalAlignment="Center" Selected="Item_Selected" LoadTemplate="ItemTemplate_LoadTemplate"/>
+            
+        </ListView>
+    </Grid>
+</UserControl>

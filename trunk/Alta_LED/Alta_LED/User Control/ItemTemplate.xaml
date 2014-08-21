@@ -1,0 +1,22 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
+	mc:Ignorable="d"
+	x:Class="Alta_LED.ItemTemplate"
+	x:Name="item"
+	d:DesignWidth="250" d:DesignHeight="250" MouseEnter="window_mouse_enter" MouseLeave="window_mouse_leave" >		
+    <Canvas x:Name="Canvas_Root" Width="{ Binding ElementName=item, Path=Width}" Height="{ Binding ElementName=item, Path=Height}">
+        <Border x:Name="Out_Line"  Width="{ Binding ElementName=Canvas_Root,Path=Width}" Height="{ Binding ElementName=Canvas_Root,Path=Height}" BorderBrush="Black" BorderThickness="1" MouseLeftButtonUp="Click_Event" >
+            <Canvas x:Name="layout" Background="White">
+                <!--<Image x:Name="Thumbnail" Width="{ Binding ElementName=Canvas_Root,Path=Width}" Height="{ Binding ElementName=Canvas_Root,Path=Height}"/>-->
+                <Label x:Name="lb_hasTemplate" Content="&#xf1d9;" Foreground="Orange" FontFamily="pack://application:,,,/Data/font/#FontAwesome" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="50"  Width="{ Binding ElementName=Canvas_Root,Path=Width}" Height="{ Binding ElementName=Canvas_Root,Path=Height}" Background="#66000000"/>
+                <Button Width="24" Height="24" Style="{DynamicResource SimpleButtonFontIcon}" Foreground="#ffff8800" Content="&#xf085;" FontSize="18" Background="Transparent" Canvas.Bottom="0" Click="setting_click"  />
+                <Button Width="24" Height="24" Style="{DynamicResource SimpleButtonFontIcon}" Foreground="#ffff8800" Content="&#xf014;" FontSize="18" Background="Transparent" Canvas.Left="25" Canvas.Bottom="0" Click="delete_Click" />
+                
+            </Canvas>
+        </Border>
+    </Canvas>
+</UserControl>

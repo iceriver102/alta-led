@@ -1,0 +1,21 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing" x:Class="Alta_LED.User_Control.Item_Toolxaml" 
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="200" x:Name="item" MouseLeftButtonUp="Click_Event">
+	<Canvas x:Name="canvas_root" Width="{Binding Width, ElementName=item}" Height="{Binding Height, ElementName=item}">
+		<Grid Width="{Binding Width, ElementName=canvas_root}" Height="{Binding Height, ElementName=canvas_root}">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="1*"/>
+				<ColumnDefinition Width="2*"/>
+			</Grid.ColumnDefinitions>
+            <Canvas x:Name="Canvas_Shape" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            	
+            </Canvas>
+            <TextBlock x:Name="txt_content" Padding="5,0,0,0" Grid.Column="1" HorizontalAlignment="Left"  TextWrapping="Wrap" Text=""  VerticalAlignment="Center"  Margin="0" Width="133" FontFamily="Verdana" FontSize="14.667" Foreground="#FF8F8181"/>
+        </Grid>
+	</Canvas>
+</UserControl>

@@ -1,0 +1,21 @@
+﻿<Application x:Class="Alta_LED.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="MainWindow.xaml" Startup="Application_Startup" Exit="App_Exit">
+    <Application.Resources>
+        
+    	<ResourceDictionary>
+            <Style x:Key="FontAwesome">
+                <Setter Property="TextElement.FontFamily" Value="pack://application:,,,/Data/font/#FontAwesome" />
+            </Style>
+            <ResourceDictionary.MergedDictionaries>
+    			<ResourceDictionary Source="Data/Themes/SimpleTemplate.xaml"/>
+                <ResourceDictionary Source="Data/Themes/Button_Close.xaml"/>
+                <ResourceDictionary Source="Data/Themes/Button_Add.xaml"/>
+                <ResourceDictionary Source="Data/Themes/Button_Setting.xaml"/>
+                <ResourceDictionary Source="Data/Themes/Button_Delete.xaml"/>
+                <ResourceDictionary Source="Simple Styles.xaml"/>
+    		</ResourceDictionary.MergedDictionaries>
+    	</ResourceDictionary>         
+    </Application.Resources>
+</Application>
