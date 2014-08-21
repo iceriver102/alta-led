@@ -1,0 +1,221 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
+        xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing" 
+        xmlns:src="clr-namespace:Alta_LED.Data.Init"
+        xmlns:Converter="clr-namespace:Alta_LED.Data.Init.Converter"
+        xmlns:userControl="clr-namespace:Alta_LED.User_Control"
+        xmlns:local="clr-namespace:Alta_LED" xmlns:ee="http://schemas.microsoft.com/expression/2010/effects" xmlns:User_Control="clr-namespace:Alta_LED.User_Control" x:Class="Alta_LED.MainWindow"
+        Title="MainWindow" Height="900" Width="1600" WindowStyle="None" WindowState="Maximized" AllowsTransparency="true" Loaded="window_load" KeyUp="Window_Keyup" Closing="Window_Closing">
+    <Window.Resources>
+        <System:Double x:Key="D_Width">1600</System:Double>
+        <System:Double x:Key="D_Height">900</System:Double>
+        <src:percentScale x:Key="data"/>
+        <Converter:StringConverter x:Key="StringConverter"/>
+        
+        
+        <Style x:Key="ScrollViewerZoom" TargetType="{x:Type ScrollViewer}" BasedOn="{x:Null}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                        <Grid Background="{TemplateBinding Background}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <ScrollContentPresenter Grid.Column="0" Grid.Row="0" Margin="{TemplateBinding Padding}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" CanContentScroll="{TemplateBinding CanContentScroll}" Grid.ColumnSpan="2"/>
+
+                            <!-- The visibility of the ScrollBars is controlled by the implementation fo the control -->
+
+                            <ScrollBar Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Grid.Column="2" Grid.Row="0" x:Name="PART_VerticalScrollBar" Style="{DynamicResource SimpleScrollBar}" Orientation="Vertical" Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" ViewportSize="{TemplateBinding ViewportHeight}" Minimum="0" Maximum="{TemplateBinding ScrollableHeight}" Width="Auto" />
+
+                            <ScrollBar Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Grid.Column="1" Grid.Row="1" x:Name="PART_HorizontalScrollBar" Style="{DynamicResource SimpleScrollBar}" Orientation="Horizontal" Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" ViewportSize="{TemplateBinding ViewportWidth}" Minimum="0" Maximum="{TemplateBinding ScrollableWidth}" Grid.ColumnSpan="1" Height="Auto" />
+                            <ComboBox  HorizontalAlignment="Left" IsEditable="True"   x:Name="cb_Scale" Style="{DynamicResource SimpleComboBox}" VerticalAlignment="Stretch" Width="80" Grid.Row="1" Margin="4 2" ItemsSource="{StaticResource data}" SelectedIndex="0"  TextBoxBase.TextChanged="ComboBox_TextChanged" >
+
+                            </ComboBox>
+
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Canvas x:Name="canvas_root" Width="1600" Height="900" Background="Black">
+      
+        <ScrollViewer  x:Name="border_main" Style="{StaticResource ScrollViewerZoom}"  Height="624" Width="1425"  Canvas.Top="50" Canvas.Left="165" BorderBrush="Black" BorderThickness="0, 1, 1, 1" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ClipToBounds="True" >
+            <ScrollViewer.Background>
+                <DrawingBrush Viewport="0,0,0.02,0.05" TileMode="Tile" Opacity="0.1">
+                    <DrawingBrush.Drawing>
+                        <DrawingGroup>
+                            <GeometryDrawing Brush="Black">
+                                <GeometryDrawing.Geometry>
+                                    <RectangleGeometry Rect="0,0,8,8" />
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+                            <GeometryDrawing>
+                                <GeometryDrawing.Geometry>
+                                    <GeometryGroup>
+                                        <RectangleGeometry Rect="0,0,4,4" />
+                                        <RectangleGeometry Rect="4,4,4,4" />
+                                    </GeometryGroup>
+                                </GeometryDrawing.Geometry>
+                                <GeometryDrawing.Brush>
+                                    <SolidColorBrush Color="Gray"/>
+                                </GeometryDrawing.Brush>
+                            </GeometryDrawing>
+                        </DrawingGroup>
+                    </DrawingBrush.Drawing>
+                </DrawingBrush>
+            </ScrollViewer.Background>
+
+            <Border x:Name="Border_layout"  Background="Black" BorderBrush="OrangeRed" BorderThickness="1" Width="{Binding Width, ElementName=main_layout}" Height="{Binding Height, ElementName=main_layout}" RenderTransformOrigin="0.5,0.5">
+                    <Canvas x:Name="main_layout" Width="1200" Height="1200" ClipToBounds="True" />
+                </Border>
+           
+        </ScrollViewer>
+        <Grid x:Name="layoutFooter" Height="219" Canvas.Top="681" Width="1600">
+            <TabControl x:Name="BankContainer"  Style="{DynamicResource SimpleTabControl}" >
+                <TabItem x:Name="tabItem" Header="Bank 1" Style="{DynamicResource SimpleTabItem}">
+                    <User_Control:Grid_Content LoadTemplate="Grid_Content_LoadTemplate"/>
+                </TabItem>
+                <TabItem Header="&#xF067;" Style="{DynamicResource SimpleAddTabItem}" MouseLeftButtonUp="AddTabEvent" FontSize="12"  />
+
+            </TabControl>
+
+        </Grid>
+        <Grid Height="50" Width="{Binding Width, ElementName=canvas_root}" Background="Transparent" Canvas.Top="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="91*"/>
+                <ColumnDefinition Width="247*"/>
+                <ColumnDefinition Width="92*"/>
+                <ColumnDefinition Width="46*"/>
+                <ColumnDefinition Width="54*"/>
+                <ColumnDefinition Width="56*"/>
+                <ColumnDefinition Width="55*"/>
+                <ColumnDefinition Width="54*"/>
+                <ColumnDefinition Width="55*"/>
+                <ColumnDefinition Width="53*"/>
+                <ColumnDefinition Width="54*"/>
+                <ColumnDefinition Width="54*"/>
+                <ColumnDefinition Width="55*"/>
+                <ColumnDefinition Width="56*"/>
+                <ColumnDefinition Width="54*"/>
+                <ColumnDefinition Width="54*"/>
+                <ColumnDefinition Width="54*"/>
+                <ColumnDefinition Width="54*"/>
+                <ColumnDefinition Width="293*"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="40"/>
+            </Grid.ColumnDefinitions>
+            <Grid.Effect>
+                <DropShadowEffect Direction="258" RenderingBias="Quality" ShadowDepth="3" Opacity="0.325" BlurRadius="12"/>
+            </Grid.Effect>
+            <Button Style="{DynamicResource SimpleButtonFontIcon}" Content="&#xf1c8;" FontSize="24"  HorizontalAlignment="Center" Width="32" Height="32" VerticalAlignment="Center"  Grid.Column="4" Click="Add_video" Background="{x:Null}" Foreground="White" Margin="13,18,9,0" >
+
+            </Button>
+            <Button Content="&#xF00D;" Grid.Column="20" FontSize="26" Style="{DynamicResource SimpleButtonFontIcon}" Background="Transparent" Foreground="White" Margin="0,18,0,0" Click="window_close"/>
+            <Button Content="&#xF068;" Grid.Column="19" FontSize="26" Style="{DynamicResource SimpleButtonFontIcon}" Background="Transparent" Foreground="White" Margin="0,27,0,0" Click="window_minimize"/>
+            <Button  Content="&#xf04b;" Grid.Column="5" FontSize="22" Style="{DynamicResource SimpleButtonFontIcon}" Background="Transparent" Foreground="White" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="32" Height="32" Click="Play_video_selected" Margin="12,0" />
+            <Button  Content="&#xf108;" Grid.Column="6" FontSize="22" Style="{DynamicResource SimpleButtonFontIcon}" Background="Transparent" Foreground="White" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="32" Height="32" Click="Play_video" Margin="12,0,11,0" />
+            <Button  Content="&#xf04c;" Grid.Column="7" FontSize="22" Style="{DynamicResource SimpleButtonFontIcon}" Background="Transparent" Foreground="White" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="32" Height="32"  Click="Pause_Video" Margin="11,0"/>
+            <Button  Content="&#xf04d;" Grid.Column="8" FontSize="22" Style="{DynamicResource SimpleButtonFontIcon}" Background="Transparent" Foreground="White" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="32" Height="32" Click="Stop_Video" Margin="11,0,12,0"/>
+            <Button  Content="&#xf0c7;" Grid.Column="9" FontSize="22" Style="{DynamicResource SimpleButtonFontIcon}" Background="Transparent" Foreground="White" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="32" Height="32" Click="Save_Template" Margin="10,0,11,0" />
+            <Button  Content="&#xf0e7;" Grid.Column="10" FontSize="22" Style="{DynamicResource SimpleButtonFontIcon}" Background="Transparent" Foreground="White" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="32" Height="32" Click="Clear_Layout" Margin="11,0" />
+            <Button  Content="&#xf014;" Grid.Column="11" FontSize="22" Style="{DynamicResource SimpleButtonFontIcon}" Background="Transparent" Foreground="White" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="32" Height="32" Click="delete_Layout" Margin="11,0" />
+            <TextBox x:Name="txt_width_layout" Style="{DynamicResource SimpleTextBox}" HorizontalAlignment="Left" Height="22"  TextWrapping="NoWrap" Text="{Binding Width,ElementName=main_layout}" VerticalAlignment="Center" Width="60" Margin="71,0,0,0" HorizontalContentAlignment="Right" Padding="3 0" Grid.Column="1" KeyUp="Width_input"/>
+            <Button  Content="&#xf0ec;" Grid.Column="1" FontSize="18" Style="{DynamicResource SimpleButtonFontIcon}" Background="Transparent" Foreground="White" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="24" Height="24"  Margin="141,0,82,12" Click="btn_permuted" />
+            <TextBox x:Name="txt_height_layout" Style="{DynamicResource SimpleTextBox}" HorizontalAlignment="Left" Height="22"  TextWrapping="NoWrap" Text="{Binding Height,ElementName=main_layout}" VerticalAlignment="Center" Width="60" Margin="172,0,0,0" HorizontalContentAlignment="Right" Padding="3 0" Grid.Column="1" KeyUp="Height_Input"/>
+            <Button  Content="&#xf161;" Grid.Column="12" FontSize="22" Style="{DynamicResource SimpleButtonFontIcon}" Background="Transparent" Foreground="White" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="32" Height="32" Click="Change_zindex_desc" Margin="12,0,11,0" />
+            <Button  Content="&#xf160;" Grid.Column="13" FontSize="22" Style="{DynamicResource SimpleButtonFontIcon}" Background="Transparent" Foreground="White" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="32" Height="32" Click="Change_zindex_asc" Margin="12,0" />
+            <Button x:Name="btn_Volume" Content="&#xf028;" Grid.Column="14" FontSize="22" Style="{DynamicResource SimpleButtonFontIcon}" Background="Transparent" Foreground="White" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="32" Height="32" Click="Change_Volume" Margin="12,0" />
+
+
+        </Grid>
+        <Grid  Height="624" Canvas.Top="50" Width="165">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="9*"/>
+                <RowDefinition Height="199*"/>
+            </Grid.RowDefinitions>
+            <Border BorderBrush="transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" Background="#FF0E1E68">
+                <TextBlock Padding="10,0,0,0" HorizontalAlignment="Left"  TextWrapping="Wrap" VerticalAlignment="Center" Text="Tool" Foreground="#FFFF5100" FontFamily="Verdana" FontSize="14.667" FontWeight="Bold" Margin="0">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="10" Direction="257" Opacity="0.675" Color="#FF383131"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Border>
+            <ListView HorizontalAlignment="Left" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderBrush="Transparent" Background="Transparent" Height="597" Grid.Row="1" VerticalAlignment="Top" Width="165">
+                <ListView.Resources>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="IsTabStop" Value="False"/>
+                        <Setter Property="Focusable" Value="False"/>
+                    </Style>
+                </ListView.Resources>
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+                       ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
+                       MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}"
+                       ItemHeight="{Binding (ListView.View).ItemHeight, RelativeSource={RelativeSource AncestorType=ListView}}" />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <User_Control:Item_Toolxaml Height="45" Width="155" TextCorlor="Orange" Text="Ellipse"  ClickEvent="ItemClick" >
+                    <User_Control:Item_Toolxaml.Property>
+                        <User_Control:EllipseProperty  />
+                    </User_Control:Item_Toolxaml.Property>
+                </User_Control:Item_Toolxaml>
+                <User_Control:Item_Toolxaml Height="45" Width="155" TextCorlor="Orange" Text="Arc"  ClickEvent="ItemClick">
+                    <userControl:Item_Toolxaml.Property>
+                        <User_Control:ArcProperty StartAngle="90" EndAngle="360" UnitType="Percent" ArcThichness="1" ></User_Control:ArcProperty>
+                    </userControl:Item_Toolxaml.Property>
+                </User_Control:Item_Toolxaml>
+                <User_Control:Item_Toolxaml Height="45" Width="155" TextCorlor="Orange" Text="Left Arrow"  ClickEvent="ItemClick">
+                    <User_Control:Item_Toolxaml.Property>
+                        <User_Control:BlockArrowProperty Orientation="Left"></User_Control:BlockArrowProperty>
+                    </User_Control:Item_Toolxaml.Property>
+                </User_Control:Item_Toolxaml>
+                <User_Control:Item_Toolxaml Height="45" Width="155" TextCorlor="Orange" Text="Right Arrow"  ClickEvent="ItemClick">
+                    <User_Control:Item_Toolxaml.Property>
+                        <User_Control:BlockArrowProperty Orientation="Right"></User_Control:BlockArrowProperty>
+                    </User_Control:Item_Toolxaml.Property>
+                </User_Control:Item_Toolxaml>
+                <User_Control:Item_Toolxaml Height="45" Width="155" TextCorlor="Orange" Text="Up Arrow"  ClickEvent="ItemClick">
+                    <User_Control:Item_Toolxaml.Property>
+                        <User_Control:BlockArrowProperty Orientation="Up"></User_Control:BlockArrowProperty>
+                    </User_Control:Item_Toolxaml.Property>
+                </User_Control:Item_Toolxaml>
+                <User_Control:Item_Toolxaml Height="45" Width="155" TextCorlor="Orange" Text="Down Arrow"  ClickEvent="ItemClick">
+                    <User_Control:Item_Toolxaml.Property>
+                        <User_Control:BlockArrowProperty Orientation="Down"></User_Control:BlockArrowProperty>
+                    </User_Control:Item_Toolxaml.Property>
+                </User_Control:Item_Toolxaml>
+                <User_Control:Item_Toolxaml Height="45" Width="155" TextCorlor="Orange" Text="Rectangle"  ClickEvent="ItemClick">
+                    <User_Control:Item_Toolxaml.Property>
+                        <userControl:RectangleProperty RadiusX="0" RadiusY="0"></userControl:RectangleProperty>
+                    </User_Control:Item_Toolxaml.Property>
+                </User_Control:Item_Toolxaml>
+                <User_Control:Item_Toolxaml Height="45" Width="155" TextCorlor="Orange" Text="Hexagon"  ClickEvent="ItemClick">
+                    <userControl:Item_Toolxaml.Property>
+                        <userControl:RegularPolygonProperty InnerRadius="1" PointCount="6"></userControl:RegularPolygonProperty>
+                    </userControl:Item_Toolxaml.Property>
+                </User_Control:Item_Toolxaml>
+                <User_Control:Item_Toolxaml Height="45" Width="155" TextCorlor="Orange" Text="Star"  ClickEvent="ItemClick">
+                    <userControl:Item_Toolxaml.Property>
+                        <userControl:RegularPolygonProperty InnerRadius="0.47" PointCount="5"></userControl:RegularPolygonProperty>
+                    </userControl:Item_Toolxaml.Property>
+                </User_Control:Item_Toolxaml>
+                <User_Control:Item_Toolxaml Height="45" Width="155" TextCorlor="Orange" Text="Ring"  ClickEvent="ItemClick">
+                    <userControl:Item_Toolxaml.Property>
+                        <userControl:ArcProperty ArcThichness="20" StartAngle="0" EndAngle="360" UnitType="Pixel"></userControl:ArcProperty>
+                    </userControl:Item_Toolxaml.Property>
+                </User_Control:Item_Toolxaml>
+            </ListView>
+        </Grid>
+        <Label x:Name="lb_debug" Content="Label" Canvas.Left="40" Canvas.Top="861" Width="1292"/>
+    </Canvas>
+</Window>

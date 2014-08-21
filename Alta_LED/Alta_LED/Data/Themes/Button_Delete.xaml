@@ -1,0 +1,36 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="ButttonDelete" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate  TargetType="Button">
+                    <Canvas Name="Capa_1" Width="52" Height="52" Canvas.Left="0" Canvas.Top="0" Cursor="Hand">
+                        <Canvas.RenderTransform>
+                            <ScaleTransform CenterX="0" CenterY="0" ScaleX="0.42" ScaleY="0.42"/>
+                        </Canvas.RenderTransform>
+                        <Canvas.Resources/>
+                        <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path3" Fill="{TemplateBinding Foreground}">
+                            <Path.Data>
+                                <PathGeometry Figures="m 21.064 8.143 c -2.999975 0.6808862 -6.172776 1.989284 -7.866305 4.706229 -0.638325 0.871189 -0.955555 2.272874 0.140808 2.943554 1.098894 0.627285 2.450188 0.438683 3.664748 0.652626 7.577601 0.701076 15.232357 0.589342 22.785689 -0.332546 1.320696 -0.20084 1.614246 -1.854871 0.743466 -2.731603 C 38.555117 10.290999 35.033679 8.5936718 31.56327 7.7746941 30.464861 7.2978559 30.176942 5.7934726 28.907014 5.5509805 27.116675 5.0522241 25.104815 5.0373965 23.3798 5.7798791 22.251182 6.2233836 22.284293 7.8691086 21.064 8.143 z" FillRule="NonZero"/>
+                            </Path.Data>
+                        </Path>
+                        <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path5" Fill="{TemplateBinding Foreground}">
+                            <Path.Data>
+                                <PathGeometry Figures="m 15.027 17.588 c -1.005331 -0.201013 -3.156758 -0.558605 -2.700213 1.148059 0.891023 8.242609 1.420178 16.52002 2.130494 24.77741 0.160904 1.403713 1.299596 2.530518 2.716219 2.653156 6.054979 0.963063 12.255095 0.863419 18.330293 0.129006 1.504265 -0.156938 3.339642 -0.422342 3.958838 -2.044625 0.56969 -1.482075 0.328666 -3.132498 0.566103 -4.6841 0.54514 -6.854353 1.253698 -13.695408 2.060112 -20.522991 0.448749 -2.046734 -1.88197 -1.304314 -3.046138 -1.161278 -7.81615 1.058038 -15.792877 1.133955 -23.57849 -0.221507 L 15.245967 17.624903 15.027 17.588 l 0 0 z M 22 40.298 c -0.30879 1.345055 -2.167246 1.559032 -3.233743 0.992263 C 17.662168 40.814554 18.081305 39.553779 18 38.622305 18 33.17687 18 27.731435 18 22.286 c 0.30879 -1.345055 2.167246 -1.559032 3.233743 -0.992263 1.104089 0.475709 0.684952 1.736484 0.766257 2.667958 0 5.445435 0 10.89087 0 16.336305 z m 7 0 c -0.30879 1.345055 -2.167246 1.559032 -3.233743 0.992263 C 24.662168 40.814554 25.081305 39.553779 25 38.622305 25 33.17687 25 27.731435 25 22.286 c 0.30879 -1.345055 2.167246 -1.559032 3.233743 -0.992263 1.104089 0.475709 0.684952 1.736484 0.766257 2.667958 0 5.445435 0 10.89087 0 16.336305 z m 7 0 c -0.30879 1.345055 -2.167246 1.559032 -3.233743 0.992263 C 31.662168 40.814554 32.081305 39.553779 32 38.622305 32 33.17687 32 27.731435 32 22.286 c 0.30879 -1.345055 2.167246 -1.559032 3.233743 -0.992263 1.104089 0.475709 0.684952 1.736484 0.766257 2.667958 0 5.445435 0 10.89087 0 16.336305 z" FillRule="NonZero"/>
+                            </Path.Data>
+                        </Path>
+                    </Canvas>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{DynamicResource DisabledBackgroundBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="#FFFF6800"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+</ResourceDictionary>

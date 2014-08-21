@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="ButtonClose_small" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate  TargetType="Button">
+                    <Canvas x:Name="Border" Width="32" Height="32" Cursor="Hand">
+                        <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path2995" Fill="{TemplateBinding Foreground}" >
+                            <Path.Data>
+                                <PathGeometry Figures="M9.207 8.5l2.768-2.768c0.195-0.195 0.195-0.512 0-0.707c-0.195-0.195-0.512-0.195-0.707 0L8.5 7.793L5.732 5.025  c-0.195-0.195-0.512-0.195-0.707 0c-0.195 0.195-0.195 0.512 0 0.707L7.793 8.5l-2.768 2.768c-0.195 0.195-0.195 0.512 0 0.707  c0.195 0.195 0.512 0.195 0.707 0L8.5 9.207l2.768 2.768c0.195 0.195 0.512 0.195 0.707 0s0.195-0.512 0-0.707L9.207 8.5z" FillRule="NonZero"/>
+                            </Path.Data>
+                        </Path>
+                    </Canvas>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{DynamicResource DisabledBackgroundBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="#FFFF6800"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

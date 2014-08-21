@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<Data_save xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Children>
+    <Template>
+      <Width>100</Width>
+      <Height>100</Height>
+      <Top>189.14835164835165</Top>
+      <Left>658.272327964861</Left>
+      <Right>0</Right>
+      <Bottom>0</Bottom>
+      <MediaSource />
+      <isSelected>false</isSelected>
+      <Type>Ellipse</Type>
+    </Template>
+    <Template>
+      <Width>100</Width>
+      <Height>100</Height>
+      <Top>163.1868131868132</Top>
+      <Left>351.39092240117134</Left>
+      <Right>0</Right>
+      <Bottom>0</Bottom>
+      <MediaSource />
+      <isSelected>true</isSelected>
+      <Type>Arc</Type>
+    </Template>
+  </Children>
+</Data_save>
