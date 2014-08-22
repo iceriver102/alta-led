@@ -457,7 +457,6 @@ namespace Alta_LED.Data.Init
             return listToClone.Select(item => (T)item.Clone()).ToList();
         }
 
-
         //Phương thức chuyển từ chuỗi có dấu thành chuỗi không dấu
         public static string ConvertToUnSign(string text)
         {
