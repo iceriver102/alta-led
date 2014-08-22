@@ -13,8 +13,6 @@
         <System:Double x:Key="D_Height">900</System:Double>
         <src:percentScale x:Key="data"/>
         <Converter:StringConverter x:Key="StringConverter"/>
-        
-        
         <Style x:Key="ScrollViewerZoom" TargetType="{x:Type ScrollViewer}" BasedOn="{x:Null}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -30,11 +28,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <ScrollContentPresenter Grid.Column="0" Grid.Row="0" Margin="{TemplateBinding Padding}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" CanContentScroll="{TemplateBinding CanContentScroll}" Grid.ColumnSpan="2"/>
-
-                            <!-- The visibility of the ScrollBars is controlled by the implementation fo the control -->
-
                             <ScrollBar Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Grid.Column="2" Grid.Row="0" x:Name="PART_VerticalScrollBar" Style="{DynamicResource SimpleScrollBar}" Orientation="Vertical" Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" ViewportSize="{TemplateBinding ViewportHeight}" Minimum="0" Maximum="{TemplateBinding ScrollableHeight}" Width="Auto" />
-
                             <ScrollBar Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Grid.Column="1" Grid.Row="1" x:Name="PART_HorizontalScrollBar" Style="{DynamicResource SimpleScrollBar}" Orientation="Horizontal" Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" ViewportSize="{TemplateBinding ViewportWidth}" Minimum="0" Maximum="{TemplateBinding ScrollableWidth}" Grid.ColumnSpan="1" Height="Auto" />
                             <ComboBox  HorizontalAlignment="Left" IsEditable="True"   x:Name="cb_Scale" Style="{DynamicResource SimpleComboBox}" VerticalAlignment="Stretch" Width="80" Grid.Row="1" Margin="4 2" ItemsSource="{StaticResource data}" SelectedIndex="0"  TextBoxBase.TextChanged="ComboBox_TextChanged" >
 
@@ -47,7 +41,7 @@
         </Style>
     </Window.Resources>
     <Canvas x:Name="canvas_root" Width="1600" Height="900" Background="Black">
-      
+
         <ScrollViewer  x:Name="border_main" Style="{StaticResource ScrollViewerZoom}"  Height="624" Width="1425"  Canvas.Top="50" Canvas.Left="165" BorderBrush="Black" BorderThickness="0, 1, 1, 1" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ClipToBounds="True" >
             <ScrollViewer.Background>
                 <DrawingBrush Viewport="0,0,0.02,0.05" TileMode="Tile" Opacity="0.1">
@@ -75,9 +69,9 @@
             </ScrollViewer.Background>
 
             <Border x:Name="Border_layout"  Background="Black" BorderBrush="OrangeRed" BorderThickness="1" Width="{Binding Width, ElementName=main_layout}" Height="{Binding Height, ElementName=main_layout}" RenderTransformOrigin="0.5,0.5">
-                    <Canvas x:Name="main_layout" Width="1200" Height="1200" ClipToBounds="True" />
-                </Border>
-           
+                <Canvas x:Name="main_layout" Width="1200" Height="1200" ClipToBounds="True" />
+            </Border>
+
         </ScrollViewer>
         <Grid x:Name="layoutFooter" Height="219" Canvas.Top="681" Width="1600">
             <TabControl x:Name="BankContainer"  Style="{DynamicResource SimpleTabControl}" >
@@ -134,6 +128,7 @@
             <Button  Content="&#xf161;" Grid.Column="12" FontSize="22" Style="{DynamicResource SimpleButtonFontIcon}" Background="Transparent" Foreground="White" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="32" Height="32" Click="Change_zindex_desc" Margin="12,0,11,0" />
             <Button  Content="&#xf160;" Grid.Column="13" FontSize="22" Style="{DynamicResource SimpleButtonFontIcon}" Background="Transparent" Foreground="White" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="32" Height="32" Click="Change_zindex_asc" Margin="12,0" />
             <Button x:Name="btn_Volume" Content="&#xf028;" Grid.Column="14" FontSize="22" Style="{DynamicResource SimpleButtonFontIcon}" Background="Transparent" Foreground="White" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="32" Height="32" Click="Change_Volume" Margin="12,0" />
+            <Button x:Name="btn_merge" Content="&#xf0c1;" Grid.Column="15" FontSize="22" Style="{DynamicResource SimpleButtonFontIcon}" Background="Transparent" Foreground="White" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="32" Height="32" Click="Create_screen" Margin="11,0" />
 
 
         </Grid>
