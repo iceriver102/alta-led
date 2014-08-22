@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\Giang.Phan\TechDay\Alta_LED\Alta_LED\obj\Release\
+F:\Giang.Phan\Projects\Alta_LED\Alta_LED\obj\Release\
 Alta_LED
 none
 false
 TRACE
-D:\Giang.Phan\TechDay\Alta_LED\Alta_LED\App.xaml
-121795826322
+F:\Giang.Phan\Projects\Alta_LED\Alta_LED\App.xaml
+121659507048
 
-301561345068
-212137524214
-Data\Themes\Button_Delete.xaml;Data\Themes\Button_Add.xaml;Data\Themes\Button_Close.xaml;Data\Themes\Button_Setting.xaml;Data\Themes\SimpleTemplate.xaml;MainWindow.xaml;Simple Styles.xaml;User Control\Alta_Screen.xaml;User Control\Border_Content.xaml;User Control\Grid_Content.xaml;User Control\ItemTemplate.xaml;User Control\Item_Toolxaml.xaml;
+301429220098
+211474857291
+Data\Themes\Button_Delete.xaml;Data\Themes\Button_Add.xaml;Data\Themes\Button_Close.xaml;Data\Themes\Button_Setting.xaml;Data\Themes\SimpleTemplate.xaml;MainWindow.xaml;Simple Styles.xaml;User Control\alta_Screen.xaml;User Control\Border_Content.xaml;User Control\Grid_Content.xaml;User Control\ItemTemplate.xaml;User Control\Item_Toolxaml.xaml;
 
-False
+True
 
