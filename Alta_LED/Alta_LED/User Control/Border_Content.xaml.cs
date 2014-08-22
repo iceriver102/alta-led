@@ -107,7 +107,7 @@ namespace Alta_LED.User_Control
                         this.Child = shape;
                         break;
                     case ShapeChilden.Arc:
-                        ArcProperty @ArcProperty = this.Property as ArcProperty;
+                        ArcProperty @ArcProperty = value as ArcProperty;
                         Arc tmpshape = new Arc();
                         tmpshape.ArcThickness = @ArcProperty.ArcThichness;
                         tmpshape.ArcThicknessUnit = ArcProperty.UnitType;
@@ -116,20 +116,20 @@ namespace Alta_LED.User_Control
                         this.Child = tmpshape;
                         break;
                     case ShapeChilden.BlockArrow:
-                        BlockArrowProperty @BlockArrowProperty = this.Property as BlockArrowProperty;
+                        BlockArrowProperty @BlockArrowProperty = value as BlockArrowProperty;
                         BlockArrow tmpshape2 = new BlockArrow();
                         tmpshape2.Orientation = BlockArrowProperty.Orientation;
                         this.Child = tmpshape2;
                         break;
                     case ShapeChilden.Rectangle:
-                        RectangleProperty @RectangleProperty = this.Property as RectangleProperty;
+                        RectangleProperty @RectangleProperty = value as RectangleProperty;
                         Rectangle @Rectangle = new Rectangle();
                         Rectangle.RadiusX = RectangleProperty.RadiusX;
                         Rectangle.RadiusY = RectangleProperty.RadiusY;
                         this.Child = Rectangle;
                         break;
                     case ShapeChilden.RegularPolygon:
-                        RegularPolygonProperty @RegularPolygonProperty = this.Property as RegularPolygonProperty;
+                        RegularPolygonProperty @RegularPolygonProperty = value as RegularPolygonProperty;
                         RegularPolygon tmpShape3 = new RegularPolygon();
                         tmpShape3.PointCount = RegularPolygonProperty.PointCount;
                         tmpShape3.InnerRadius = RegularPolygonProperty.InnerRadius;
@@ -253,7 +253,7 @@ namespace Alta_LED.User_Control
         }
         [NonSerialized]
         private Shape _child;
-
+       
         public Shape Child
         {
             get
@@ -276,6 +276,7 @@ namespace Alta_LED.User_Control
                 Binding binding = new Binding();
                 binding.Source = value;
                 BindingOperations.SetBinding(Mask, VisualBrush.VisualProperty, binding);
+
                 this.video.OpacityMask = Mask;
                 this.layoutDraw.Children.Clear();
                 this.layoutDraw.Children.Add(value);
@@ -290,6 +291,8 @@ namespace Alta_LED.User_Control
             }
            private set
             {
+                if (value < 4)
+                    return;
                 this.Width = value + 16;
                 OutLine.Width = value;
                 this.video.Width = value;
@@ -297,7 +300,6 @@ namespace Alta_LED.User_Control
                 if (this._child != null)
                 {
                     this._child.Width = value - 4;
-
                 }
                 rect_01.setPosition(value / 2 + 4, 0);
                 Canvas.SetLeft(rect_21, value / 2 + 4);
@@ -313,6 +315,8 @@ namespace Alta_LED.User_Control
             }
             private set
             {
+                if (value < 4)
+                    return;
                 this.Height = value + 16;
                 this.video.Height = value;
                 OutLine.Height = value;
@@ -333,6 +337,7 @@ namespace Alta_LED.User_Control
             this.isMute = false;
         }
 
+        #region resize
         private void resize_top_left(object sender, MouseEventArgs e)
         {
             Rectangle tmp = sender as Rectangle;
@@ -434,6 +439,7 @@ namespace Alta_LED.User_Control
                 Canvas.SetTop(this, p.Y);
             }
         }
+        #endregion
 
         private void Selected(object sender, MouseButtonEventArgs e)
         {
