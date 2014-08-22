@@ -244,30 +244,7 @@ namespace Alta_LED
             this.Load_Template();
 
         }
-        private void Add_new_Screen(object sender, RoutedEventArgs e)
-        {
-            Alta_Screen Screen = new Alta_Screen();
-            Screen.setPosition(10, 10);
-            Screen.Width = 400;
-            Screen.Height = 400;
-            Screen.RemoveEvent += (s, arg) =>
-            {
-                this.main_layout.Children.Remove(s as Alta_Screen);
-            };
-            Screen.SelectChange += (s, arg) =>
-            {
-                if (arg)
-                {
-                    var item = this.main_layout.Children.Cast<Alta_Screen>().Where(i => (i.isSelected == true && i != (s as Alta_Screen))).SingleOrDefault();
-                    if (item != null)
-                    {
-                        (item as Alta_Screen).isSelected = false;
-                    }
-
-                }
-            };
-            Screen.Parent = this.main_layout;
-        }
+      
 
         private void window_close(object sender, RoutedEventArgs e)
         {
@@ -608,14 +585,31 @@ namespace Alta_LED
             String text = cb_Scale.Text;
             if (text.isNumber())
             {
-                Double tmp = Convert.ToDouble(cb_Scale.Text);
-                //this.main_layout.aniScaleCanvas(0, 0, tmp / this.oldScale, tmp / this.oldScale, 0, null, true);
+                Double tmp = Convert.ToDouble(cb_Scale.Text);              
                 this.Border_layout.ScaleLayout(tmp / this.oldScale, tmp / this.oldScale);
-               
-                //this.oldScale = tmp;
-              //  this.lb_debug.Content = tmp.ToString();
             }
            
+        }
+
+        private void Create_screen(object sender, RoutedEventArgs e)
+        {
+              int count = this.main_layout.Children.Count;
+              for (int i = 0; i < count; i++)
+              {
+                  if (this.main_layout.Children[i] is Border_Content)
+                  {
+                      Border_Content @Border_Content = this.main_layout.Children[i] as Border_Content;
+                      if (Border_Content.isSelected)
+                      {
+                          alta_Screen Screen = new alta_Screen();                         
+                          Screen.RealWidth += Border_Content.RealWidth;
+                          Screen.RealHeight += Border_Content.RealHeight;
+                          Screen.AddProperty(Border_Content.Property);
+                          Screen.setPosition(Border_Content.getPosition());
+                          this.main_layout.Children.Add(Screen);
+                      }
+                  }
+              }
         }
     }
 }
