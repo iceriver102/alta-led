@@ -51,7 +51,7 @@ namespace Alta_LED.Data.Init
         public static void WriteFile(String data, String FileName)
         {
             StreamWriter wr = new StreamWriter(FileName);
-            wr.WriteLine(data);           
+            wr.WriteLine(data);
             wr.Close();
         }
         static Random rand = new Random();
@@ -59,10 +59,12 @@ namespace Alta_LED.Data.Init
         {
             return new Point() { X = Canvas.GetLeft(e), Y = Canvas.GetTop(e) };
         }
-        public static void setPosition(this UIElement layout,double x, double y)
+        public static void setPosition(this UIElement layout, double x, double y)
         {
-            Canvas.SetTop(layout, y);
-            Canvas.SetLeft(layout, x);
+            if (!Double.IsNaN(y))
+                Canvas.SetTop(layout, y);
+            if (!Double.IsNaN(x))
+                Canvas.SetLeft(layout, x);
         }
         public static void setPosition(this UIElement layout, Point pos)
         {
@@ -74,7 +76,7 @@ namespace Alta_LED.Data.Init
             Canvas.SetLeft(layout, v.X);
             Canvas.SetTop(layout, v.Y);
         }
-        public static void aniMoveTo(this UIElement target, double newX, double newY, double timeDuration, IEasingFunction iEasingFunction, Action CompleteFunction=null)
+        public static void aniMoveTo(this UIElement target, double newX, double newY, double timeDuration, IEasingFunction iEasingFunction, Action CompleteFunction = null)
         {
             var top = Canvas.GetTop(target);
             if (top.ToString().Contains("NaN")) { top = 0; }
@@ -84,7 +86,7 @@ namespace Alta_LED.Data.Init
             target.RenderTransform = trans;
             var tmpNewX = newX - left;
             var tmpNewY = newY - top;
-            if(iEasingFunction == null) iEasingFunction = new PowerEase  { EasingMode = EasingMode.EaseInOut };
+            if (iEasingFunction == null) iEasingFunction = new PowerEase { EasingMode = EasingMode.EaseInOut };
             DoubleAnimation anim1 = new DoubleAnimation(0, newY - top, TimeSpan.FromSeconds(timeDuration)) { EasingFunction = iEasingFunction };
             DoubleAnimation anim2 = new DoubleAnimation(0, newX - left, TimeSpan.FromSeconds(timeDuration)) { EasingFunction = iEasingFunction };
             anim1.FillBehavior = FillBehavior.HoldEnd;
@@ -246,7 +248,7 @@ namespace Alta_LED.Data.Init
                 }
                 string path = "";
                 path = rootPath + folderName + @"\" + folderName + pos + ".avi";
-                if(File.Exists(path))
+                if (File.Exists(path))
                     return new Uri(path, UriKind.Relative);
                 path = rootPath + folderName + @"\" + folderName + pos + ".mp4";
                 if (File.Exists(path))
@@ -290,7 +292,7 @@ namespace Alta_LED.Data.Init
                 return null;
             }
         }
-        
+
         public static Uri convertStringToUri(string folderName, bool randomImage = true, int position = 1, string rootPath = @"Resources\Images\", bool typeCount = true)
         {
             try
@@ -307,7 +309,7 @@ namespace Alta_LED.Data.Init
                 {
                     pos = position;
                 }
-                
+
                 string path = "";
                 path = rootPath + folderName + @"\" + folderName + pos + ".jpg";
                 if (File.Exists(path))
@@ -588,7 +590,7 @@ namespace Alta_LED.Data.Init
             int countFiles = countFilesInDirectory(folder, true);
             mtPlayImage(img, indexPlayImage, folder, countFiles, duration, repeat, holdLastFrame);
         }
-        
+
         //Default: Duration = 100
         public static void myThreadPlayImage(this Image img, Thread threadPlayImage, int indexPlayImage, string folder, int countFiles, int duration, bool repeat, bool holdLastFrame)
         {
@@ -685,6 +687,6 @@ namespace Alta_LED.Data.Init
             result = convertString.Substring(0, len) + result;
             return result;
         }
-        
+
     }
 }
