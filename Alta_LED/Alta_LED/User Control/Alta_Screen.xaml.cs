@@ -62,8 +62,8 @@ namespace Alta_LED.User_Control
                 int count = this.Properties.Count;
                 for (int i = 0; i < count; i++)
                 {
-                    this.Properties[i].Left =this.Properties[i].FixLeft- value;
-                   
+                    this.Properties[i].Left = this.Properties[i].FixLeft - value;
+
                 }
             }
         }
@@ -100,11 +100,11 @@ namespace Alta_LED.User_Control
         {
             get
             {
-                return this.getPosition().Y;  
+                return this.getPosition().Y;
             }
             set
             {
-                this.setPosition(Double.NaN,value);
+                this.setPosition(Double.NaN, value);
             }
 
         }
@@ -320,17 +320,17 @@ namespace Alta_LED.User_Control
                 rect_01.setPosition(value / 2 + 4, 0);
                 Canvas.SetLeft(rect_21, value / 2 + 4);
                 Canvas.SetBottom(rect_21, 0);
-              
+
             }
         }
         private void ScaleContent()
         {
             if (this.Children == null)
                 return;
-            
+
             this.layoutDraw.RenderTransformOrigin = new Point(0.5, 0.5);
             ScaleTransform s = new ScaleTransform(this.Width / this.fixWidth, this.Height / this.fixHeight);
-            this.layoutDraw.LayoutTransform=s;
+            this.layoutDraw.LayoutTransform = s;
 
         }
         public Double RealHeight
@@ -351,7 +351,7 @@ namespace Alta_LED.User_Control
                 this.video.Height = value;
                 OutLine.Height = value;
                 this.layoutDraw.Height = value - 4;
-               // ScaleContent();
+                // ScaleContent();
                 rect_10.setPosition(0, value / 2 + 4);
                 Canvas.SetRight(rect_12, 0);
                 Canvas.SetTop(rect_12, value / 2 + 4);
@@ -375,7 +375,7 @@ namespace Alta_LED.User_Control
                 this.RealWidth = Math.Abs(-p.X + this.getPosition().X + this.RealWidth);
                 ScaleContent();
                 this.setPosition(p);
-               
+
             }
         }
 
@@ -476,7 +476,7 @@ namespace Alta_LED.User_Control
             }
         }
         #endregion
-         private void Selected(object sender, MouseButtonEventArgs e)
+        private void Selected(object sender, MouseButtonEventArgs e)
         {
             if (Keyboard.Modifiers == ModifierKeys.Control)
             {
@@ -488,7 +488,7 @@ namespace Alta_LED.User_Control
                 if (this.selectEvent != null)
                 {
                     this.selectEvent(this, this.isSelected);
-                }                
+                }
             }
             this.layoutDraw.ReleaseMouseCapture();
         }
@@ -516,10 +516,10 @@ namespace Alta_LED.User_Control
             {
                 this.Children = new List<Shape>();
             }
-            
+
             shape.Fill = Brushes.Orange;
             this.Children.Add(shape);
-            this.layoutDraw.Children.Add(this.Children[this.Children.Count-1]);
+            this.layoutDraw.Children.Add(this.Children[this.Children.Count - 1]);
         }
         public void AddProperty(ShapeProperty @ShapeProperty)
         {
@@ -533,8 +533,8 @@ namespace Alta_LED.User_Control
             this.Properties.Add(ShapeProperty);
             switch (ShapeProperty.Type)
             {
-                case ShapeChilden.Ellipse:                    
-                    Ellipse shape = new Ellipse();                   
+                case ShapeChilden.Ellipse:
+                    Ellipse shape = new Ellipse();
                     shape.Width = ShapeProperty.Width;
                     shape.Height = ShapeProperty.Height;
                     shape.setPosition(ShapeProperty.Left, ShapeProperty.Top);
@@ -543,7 +543,7 @@ namespace Alta_LED.User_Control
                 case ShapeChilden.Arc:
                     ArcProperty @ArcProperty = ShapeProperty as ArcProperty;
                     Arc tmpshape = new Arc();
-                   
+
                     tmpshape.ArcThickness = @ArcProperty.ArcThichness;
                     tmpshape.ArcThicknessUnit = ArcProperty.UnitType;
                     tmpshape.EndAngle = ArcProperty.EndAngle;
@@ -560,7 +560,7 @@ namespace Alta_LED.User_Control
                     tmpshape2.setPosition(BlockArrowProperty.Left, BlockArrowProperty.Top);
                     tmpshape2.Width = ShapeProperty.Width;
                     tmpshape2.Height = ShapeProperty.Height;
-                    this.AddShape(tmpshape2);                    
+                    this.AddShape(tmpshape2);
                     break;
                 case ShapeChilden.Rectangle:
                     RectangleProperty @RectangleProperty = ShapeProperty as RectangleProperty;
@@ -590,7 +590,7 @@ namespace Alta_LED.User_Control
                 this.maxTop = this.Properties[0].FixTop + this.Properties[0].Height;
                 this.minLeft = this.Properties[0].FixLeft;
                 this.minTop = this.Properties[0].FixTop;
-               
+
 
             }
             else
@@ -613,7 +613,7 @@ namespace Alta_LED.User_Control
                 }
             }
             this.UpdateDraw();
-            
+
         }
         public void UpdateDraw()
         {
@@ -632,9 +632,19 @@ namespace Alta_LED.User_Control
             Binding binding = new Binding();
             binding.Source = this.layoutDraw;
             BindingOperations.SetBinding(Mask, VisualBrush.VisualProperty, binding);
+
+            this.video.OpacityMask = Mask;
+
+        }
+        public void UpdateMask()
+        {
+            //VisualBrush Mask = new VisualBrush();
+            //Binding binding = new Binding();
+            //binding.Source = this.layoutDraw;
+            //BindingOperations.SetBinding(Mask, VisualBrush.VisualProperty, binding);
         }
 
 
     }
-    
+
 }
