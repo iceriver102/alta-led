@@ -23,6 +23,17 @@ namespace Alta_LED.User_Control
         public double Height { get; set; }
         public double Top { get; set; }
         public double Left { get; set; }
+        public double FixTop
+        {
+            get;
+            private set;
+        }
+        
+        public double FixLeft
+        {
+            get;
+            private set;
+        }
 
         public ShapeProperty()
         {
@@ -36,6 +47,11 @@ namespace Alta_LED.User_Control
             this.Type = type;
             this.Width = 100;
             this.Height = 100;
+        }
+        public void setFixCode()
+        {
+            this.FixLeft = this.Left;
+            this.FixTop = this.Top;
         }
     }
     [Serializable]

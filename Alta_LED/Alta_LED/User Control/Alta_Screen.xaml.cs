@@ -24,6 +24,90 @@ namespace Alta_LED.User_Control
     /// </summary>
     public partial class alta_Screen : UserControl
     {
+        private double x, y;
+        private double x2, y2;
+        public double maxLeft
+        {
+            get
+            {
+                return x2;
+
+            }
+            set
+            {
+                x2 = value;
+                this.RealWidth = value - this.minLeft;
+            }
+        }
+        public double maxTop
+        {
+            get
+            {
+                return y2;
+            }
+            set
+            {
+                y2 = value;
+                this.RealHeight = value - this.minTop;
+            }
+        }
+        public double minLeft
+        {
+            get { return x; }
+
+            set
+            {
+                x = value;
+                this.RealWidth = this.maxLeft - value;
+                int count = this.Properties.Count;
+                for (int i = 0; i < count; i++)
+                {
+                    this.Properties[i].Left =this.Properties[i].FixLeft- value;
+                   
+                }
+            }
+        }
+        public double minTop
+        {
+            get
+            {
+                return y;
+            }
+            set
+            {
+                y = value;
+                this.RealHeight = this.maxTop - value;
+                int count = this.Properties.Count;
+                for (int i = 0; i < count; i++)
+                {
+                    this.Properties[i].Top = this.Properties[i].FixTop - value;
+                }
+            }
+        }
+        public double Left
+        {
+            get
+            {
+                return this.getPosition().X;
+            }
+            set
+            {
+                this.setPosition(value, Double.NaN);
+            }
+        }
+
+        public double Top
+        {
+            get
+            {
+                return this.getPosition().Y;  
+            }
+            set
+            {
+                this.setPosition(Double.NaN,value);
+            }
+
+        }
         public double fixWidth
         {
             get;
@@ -363,6 +447,7 @@ namespace Alta_LED.User_Control
             {
                 Point p = e.GetPosition(this.Parents);
                 this.RealHeight = Math.Abs(-p.Y + this.getPosition().Y + this.RealHeight);
+                this.ScaleContent();
                 Canvas.SetTop(this, p.Y);
             }
         }
@@ -415,7 +500,6 @@ namespace Alta_LED.User_Control
             this.delta = new Point() { X = p.X - pos.X, Y = p.Y - pos.Y };
             this.layoutDraw.CaptureMouse();
             this.layoutDraw.Cursor = Cursors.SizeAll;
-
         }
 
         private void MoveItem(object sender, MouseEventArgs e)
@@ -443,11 +527,14 @@ namespace Alta_LED.User_Control
             {
                 this.Properties = new List<ShapeProperty>();
             }
+            ShapeProperty.setFixCode();
+            ShapeProperty.Top = ShapeProperty.FixTop - this.minTop;
+            ShapeProperty.Left = ShapeProperty.FixLeft - this.minLeft;
             this.Properties.Add(ShapeProperty);
             switch (ShapeProperty.Type)
             {
                 case ShapeChilden.Ellipse:                    
-                    Ellipse shape = new Ellipse();
+                    Ellipse shape = new Ellipse();                   
                     shape.Width = ShapeProperty.Width;
                     shape.Height = ShapeProperty.Height;
                     shape.setPosition(ShapeProperty.Left, ShapeProperty.Top);
@@ -456,6 +543,7 @@ namespace Alta_LED.User_Control
                 case ShapeChilden.Arc:
                     ArcProperty @ArcProperty = ShapeProperty as ArcProperty;
                     Arc tmpshape = new Arc();
+                   
                     tmpshape.ArcThickness = @ArcProperty.ArcThichness;
                     tmpshape.ArcThicknessUnit = ArcProperty.UnitType;
                     tmpshape.EndAngle = ArcProperty.EndAngle;
@@ -495,13 +583,55 @@ namespace Alta_LED.User_Control
                     this.AddShape(tmpShape3);
                     break;
             }
+            int count = this.Properties.Count;
+            if (count == 1)
+            {
+                this.maxLeft = this.Properties[0].FixLeft + this.Properties[0].Width;
+                this.maxTop = this.Properties[0].FixTop + this.Properties[0].Height;
+                this.minLeft = this.Properties[0].FixLeft;
+                this.minTop = this.Properties[0].FixTop;
+               
+
+            }
+            else
+            {
+                if (this.minLeft > ShapeProperty.FixLeft)
+                {
+                    this.minLeft = ShapeProperty.FixLeft;
+                }
+                if (this.minTop > ShapeProperty.FixTop)
+                {
+                    this.minTop = ShapeProperty.FixTop;
+                }
+                if (this.maxLeft < ShapeProperty.FixLeft + ShapeProperty.Width)
+                {
+                    this.maxLeft = ShapeProperty.FixLeft + ShapeProperty.Width;
+                }
+                if (this.maxTop < ShapeProperty.FixTop + ShapeProperty.Height)
+                {
+                    this.maxTop = ShapeProperty.FixTop + ShapeProperty.Height;
+                }
+            }
+            this.UpdateDraw();
             
+        }
+        public void UpdateDraw()
+        {
+            int count = this.Properties.Count;
+            for (int i = 0; i < count; i++)
+            {
+                this.Children[i].setPosition(this.Properties[i].Left, this.Properties[i].Top);
+            }
         }
 
         private void Usercontrol_Load(object sender, RoutedEventArgs e)
         {
             this.fixWidth = this.Width;
             this.fixHeight = this.Height;
+            VisualBrush Mask = new VisualBrush();
+            Binding binding = new Binding();
+            binding.Source = this.layoutDraw;
+            BindingOperations.SetBinding(Mask, VisualBrush.VisualProperty, binding);
         }
 
 
