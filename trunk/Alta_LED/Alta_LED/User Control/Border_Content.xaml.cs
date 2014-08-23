@@ -136,9 +136,7 @@ namespace Alta_LED.User_Control
                         this.Child = tmpShape3;
                         break;
                 }
-                this.Child.setPosition(value.Left, value.Left);
-
-
+                //this.Child.setPosition(value.Left, value.Top);
             }
         }
         private MediaBase mediaSource;
@@ -266,7 +264,7 @@ namespace Alta_LED.User_Control
                 value.Margin = new Thickness(0);
                 if (this.Property != null)
                 {
-                    value.setPosition(this.Property.Left, this.Property.Top);
+                    //value.setPosition(this.Property.Left, this.Property.Top);
                 }
                 value.Width = this.RealWidth-4;
                 value.Height = this.RealHeight-4;
@@ -474,6 +472,8 @@ namespace Alta_LED.User_Control
             {
                 Point p = e.GetPosition(this.Parents);
                 this.setPosition(p.X - this.delta.X, p.Y - this.delta.Y);
+                this.Property.Top = p.Y-this.delta.Y;
+                this.Property.Left = p.X-this.delta.X;
             }
         }
     }
