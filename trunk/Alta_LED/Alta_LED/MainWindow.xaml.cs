@@ -137,7 +137,7 @@ namespace Alta_LED
         }
         public void ItemClick(Object sender, ShapeProperty e)
         {
-           Border_Content content = null;
+            Border_Content content = null;
             content = new Border_Content();           
             content.setPosition(0, 0);
             content.selectEvent += content_selectEvent;
@@ -149,26 +149,65 @@ namespace Alta_LED
         {
             if (e)
             {
-                Border_Content tmp = sender as Border_Content;
-                if (!tmp.isMute)
+                if (sender is Border_Content)
                 {
-                    this.btn_Volume.Content = "\uf028";
-                }
-                else
-                {
-                    this.btn_Volume.Content = "\uf026";
-                }
-                int count = this.main_layout.Children.Count;
-                for (int i = 0; i < count; i++)
-                {
-                    if (this.main_layout.Children[i] is Border_Content)
+                    Border_Content tmp = sender as Border_Content;
+                    if (!tmp.isMute)
                     {
-                        Border_Content contentTmp = this.main_layout.Children[i] as Border_Content;
-                        if (tmp != contentTmp)
+                        this.btn_Volume.Content = "\uf028";
+                    }
+                    else
+                    {
+                        this.btn_Volume.Content = "\uf026";
+                    }
+                    int count = this.main_layout.Children.Count;
+                    for (int i = 0; i < count; i++)
+                    {
+                        if (this.main_layout.Children[i] is Border_Content)
                         {
-                            contentTmp.isSelected = false;
-                        }
+                            Border_Content contentTmp = this.main_layout.Children[i] as Border_Content;
+                            if (tmp != contentTmp)
+                            {
+                                contentTmp.isSelected = false;
+                            }
 
+                        }
+                        else if (this.main_layout.Children[i] is alta_Screen)
+                        {
+                            alta_Screen alta_ScreenTmp = this.main_layout.Children[i] as alta_Screen;
+                          
+                                alta_ScreenTmp.isSelected = false;
+                            
+                        }
+                    }
+                }
+                else if (sender is alta_Screen)
+                {
+                    alta_Screen @alta_Screen =sender as alta_Screen;
+                    if (alta_Screen.isMute)
+                    {
+                        this.btn_Volume.Content = "\uf026";
+                    }
+                    else
+                    {
+                        this.btn_Volume.Content = "\uf028";
+                    }
+                    int count = this.main_layout.Children.Count;
+                    for (int i = 0; i < count; i++)
+                    {
+                        if (this.main_layout.Children[i] is alta_Screen)
+                        {
+                            alta_Screen alta_ScreenTmp = this.main_layout.Children[i] as alta_Screen;
+                            if (alta_Screen != alta_ScreenTmp)
+                            {
+                                alta_ScreenTmp.isSelected = false;
+                            }
+                        }
+                        else if (this.main_layout.Children[i] is Border_Content)
+                        {
+                            Border_Content @Border_Content = this.main_layout.Children[i] as Border_Content;
+                            Border_Content.isSelected = false;
+                        }
                     }
                 }
             }
@@ -295,6 +334,14 @@ namespace Alta_LED
                             //tmp.ModePlayer = PlayerMode.Play;
                         }
                     }
+                    else if (this.main_layout.Children[i] is alta_Screen)
+                    {
+                        alta_Screen @alta_Screen = this.main_layout.Children[i] as alta_Screen;
+                        if (alta_Screen.isSelected)
+                        {
+                            alta_Screen.MediaSource = file;
+                        }
+                    }
                 }
             }
         }
@@ -323,6 +370,14 @@ namespace Alta_LED
                         tmp.ModePlayer = PlayerMode.Play;
                     }
                 }
+                else if (this.main_layout.Children[i] is alta_Screen)
+                {
+                    alta_Screen @alta_Screen = this.main_layout.Children[i] as alta_Screen;
+                    if (alta_Screen.MediaSource != null)
+                    {
+                        alta_Screen.ModePlayer = PlayerMode.Play;
+                    }
+                }
             }
         }
 
@@ -339,6 +394,14 @@ namespace Alta_LED
                         tmp.ModePlayer = PlayerMode.Pause;
                     }
                 }
+                else if (this.main_layout.Children[i] is alta_Screen)
+                {
+                    alta_Screen @alta_Screen = this.main_layout.Children[i] as alta_Screen;
+                    if (alta_Screen.MediaSource != null)
+                    {
+                        alta_Screen.ModePlayer = PlayerMode.Pause;
+                    }
+                }
             }
         }
 
@@ -353,6 +416,14 @@ namespace Alta_LED
                     if (tmp.MediaSource != null)
                     {
                         tmp.ModePlayer = PlayerMode.Stop;
+                    }
+                }
+                else if (this.main_layout.Children[i] is alta_Screen)
+                {
+                    alta_Screen @alta_Screen = this.main_layout.Children[i] as alta_Screen;
+                    if (alta_Screen.MediaSource != null)
+                    {
+                        alta_Screen.ModePlayer = PlayerMode.Stop;
                     }
                 }
             }
@@ -456,6 +527,15 @@ namespace Alta_LED
                         break;
                     }
                 }
+                else if (this.main_layout.Children[i] is alta_Screen)
+                {
+                    alta_Screen screen = this.main_layout.Children[i] as alta_Screen;
+                    if (screen.isSelected)
+                    {
+                        this.main_layout.Children.Remove(screen);
+                        break;
+                    }
+                }
             }
         }
 
@@ -466,8 +546,7 @@ namespace Alta_LED
             this.txt_width_layout.Text = tmp;
             double num_tmp = this.Layout_Height;
             this.Layout_Height = this.Layout_Width;
-            this.Layout_Width = num_tmp;
-           
+            this.Layout_Width = num_tmp;  
         }
 
         private void Width_input(object sender, KeyEventArgs e)
@@ -517,6 +596,14 @@ namespace Alta_LED
                     if (tmp.MediaSource != null && tmp.isSelected)
                     {
                         tmp.ModePlayer = PlayerMode.Play;
+                    }
+                }
+                else if (this.main_layout.Children[i] is alta_Screen)
+                {
+                    alta_Screen @alta_Screen = this.main_layout.Children[i] as alta_Screen;
+                    if (alta_Screen.MediaSource != null && alta_Screen.isSelected)
+                    {
+                        alta_Screen.ModePlayer = PlayerMode.Play;
                     }
                 }
             }
@@ -594,6 +681,9 @@ namespace Alta_LED
         private void Create_screen(object sender, RoutedEventArgs e)
         {
               int count = this.main_layout.Children.Count;
+              bool flag = false;
+              alta_Screen Screen = new alta_Screen();
+              Screen.selectEvent += content_selectEvent;
               for (int i = 0; i < count; i++)
               {
                   if (this.main_layout.Children[i] is Border_Content)
@@ -601,15 +691,17 @@ namespace Alta_LED
                       Border_Content @Border_Content = this.main_layout.Children[i] as Border_Content;
                       if (Border_Content.isSelected)
                       {
-                          alta_Screen Screen = new alta_Screen();                         
-                          Screen.RealWidth += Border_Content.RealWidth;
-                          Screen.RealHeight += Border_Content.RealHeight;
+                        
                           Screen.AddProperty(Border_Content.Property);
                           Screen.setPosition(Border_Content.getPosition());
-                          this.main_layout.Children.Add(Screen);
+                          flag = true;
                       }
                   }
               }
+            if(flag)
+              this.main_layout.Children.Add(Screen);
         }
+
+        
     }
 }
