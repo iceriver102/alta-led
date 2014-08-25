@@ -180,6 +180,8 @@ namespace Alta_LED.User_Control
                 }
             }
         }
+        private GeometryCollection Geometries;
+      //  private GeometryGroup shapeGroup;
         private MediaBase mediaSource;
         private PlayerMode _player = PlayerMode.None;
         public PlayerMode ModePlayer
@@ -510,7 +512,7 @@ namespace Alta_LED.User_Control
                 this.setPosition(p.X - this.delta.X, p.Y - this.delta.Y);
             }
         }
-        private void AddShape(Shape shape)
+        private void AddShape(Shape shape, Geometry geometry=null)
         {
             if (this.Children == null)
             {
@@ -519,7 +521,16 @@ namespace Alta_LED.User_Control
 
             shape.Fill = Brushes.Orange;
             this.Children.Add(shape);
-            this.layoutDraw.Children.Add(this.Children[this.Children.Count - 1]);
+            if (geometry != null)
+            {
+                if (this.Geometries == null)
+                    this.Geometries = new GeometryCollection();
+                this.Geometries.Add(geometry);
+            }
+            this.shapeGroup.Children = this.Geometries;
+           
+           
+           // this.layoutDraw.Children.Add(this.Children[this.Children.Count - 1]);
         }
         public void AddProperty(ShapeProperty @ShapeProperty)
         {
@@ -538,12 +549,16 @@ namespace Alta_LED.User_Control
                     shape.Width = ShapeProperty.Width;
                     shape.Height = ShapeProperty.Height;
                     shape.setPosition(ShapeProperty.Left, ShapeProperty.Top);
-                    this.AddShape(shape);
+                    EllipseGeometry @EllipseGeometry = new EllipseGeometry();
+                    EllipseGeometry.Center = new Point() { X = (ShapeProperty.Width) / 2, Y = (ShapeProperty.Height) / 2 };
+                    EllipseGeometry.RadiusX = (ShapeProperty.Width) / 2;
+                    EllipseGeometry.RadiusY = (ShapeProperty.Height) / 2;
+                    this.AddShape(shape,EllipseGeometry);
                     break;
                 case ShapeChilden.Arc:
                     ArcProperty @ArcProperty = ShapeProperty as ArcProperty;
                     Arc tmpshape = new Arc();
-
+                    PathGeometry @PathGeometry = getPathGeometryArc(ArcProperty);                    
                     tmpshape.ArcThickness = @ArcProperty.ArcThichness;
                     tmpshape.ArcThicknessUnit = ArcProperty.UnitType;
                     tmpshape.EndAngle = ArcProperty.EndAngle;
@@ -551,7 +566,9 @@ namespace Alta_LED.User_Control
                     tmpshape.setPosition(ArcProperty.Left, ArcProperty.Top);
                     tmpshape.Width = ShapeProperty.Width;
                     tmpshape.Height = ShapeProperty.Height;
-                    this.AddShape(tmpshape);
+                   
+                    
+                    this.AddShape(tmpshape, PathGeometry);
                     break;
                 case ShapeChilden.BlockArrow:
                     BlockArrowProperty @BlockArrowProperty = ShapeProperty as BlockArrowProperty;
@@ -570,7 +587,11 @@ namespace Alta_LED.User_Control
                     Rectangle.setPosition(@RectangleProperty.Left, @RectangleProperty.Top);
                     Rectangle.Width = ShapeProperty.Width;
                     Rectangle.Height = ShapeProperty.Height;
-                    this.AddShape(Rectangle);
+                    RectangleGeometry @RectangleGeometry = new RectangleGeometry();
+                    RectangleGeometry.RadiusX = RectangleProperty.RadiusX;
+                    RectangleGeometry.RadiusY = RectangleProperty.RadiusY;
+                    
+                    this.AddShape(Rectangle,RectangleGeometry);
                     break;
                 case ShapeChilden.RegularPolygon:
                     RegularPolygonProperty @RegularPolygonProperty = ShapeProperty as RegularPolygonProperty;
@@ -615,6 +636,8 @@ namespace Alta_LED.User_Control
             this.UpdateDraw();
 
         }
+
+        
         public void UpdateDraw()
         {
             int count = this.Properties.Count;
@@ -632,6 +655,7 @@ namespace Alta_LED.User_Control
             Binding binding = new Binding();
             binding.Source = this.layoutDraw;
             BindingOperations.SetBinding(Mask, VisualBrush.VisualProperty, binding);
+           // Geometries = new  GeometryCollection();
 
             this.video.OpacityMask = Mask;
 
@@ -643,7 +667,85 @@ namespace Alta_LED.User_Control
             //binding.Source = this.layoutDraw;
             //BindingOperations.SetBinding(Mask, VisualBrush.VisualProperty, binding);
         }
+        private PathGeometry getPathGeometryArc(ArcProperty ShapeProperty)
+        {
+            PathGeometry PathGeometry = new PathGeometry();
+            double R = ShapeProperty.Width / 2;
+            Point I = new Point() { X = ShapeProperty.Width / 2, Y = ShapeProperty.Height / 2 };
+            double delta = 30;
+            double AngelStart = ShapeProperty.StartAngle;
+            List<Point> listPoint = this.getListPoint(ShapeProperty.StartAngle, ShapeProperty.EndAngle, R, delta);
+            int index=0;
+            BezierSegment BezierSegment1 = new BezierSegment();
+            BezierSegment BezierSegment2 = new BezierSegment();
+            BezierSegment BezierSegment3 = new BezierSegment();
+            BezierSegment BezierSegment4 = new BezierSegment();
+            LineSegment line = new LineSegment();
+            line.Point = I;
+            if ( listPoint!=null && listPoint.Count > 0)
+            {
+                int count = listPoint.Count;
+                while (index < count / 3)
+                {
+                   // int i = index;
+                    if (index < 1)
+                    {
+                        BezierSegment1.Point1 = listPoint[index * 3 + 0];
+                        BezierSegment1.Point2 = listPoint[index * 3 + 1];
+                        BezierSegment1.Point3 = listPoint[index * 3 + 2];
+                    }
+                    else if (index < 2)
+                    {
+                        BezierSegment2.Point1 = listPoint[index * 3 + 0];
+                        BezierSegment2.Point2 = listPoint[index * 3 + 1];
+                        BezierSegment2.Point3 = listPoint[index * 3 + 2];
+                    }
+                    else if (index < 3)
+                    {
+                        BezierSegment3.Point1 = listPoint[index * 3 + 0];
+                        BezierSegment3.Point2 = listPoint[index * 3 + 1];
+                        BezierSegment3.Point3 = listPoint[index * 3 + 2];
+                    }
+                    else if (index < 4)
+                    {
+                        BezierSegment4.Point1 = listPoint[index * 3 + 0];
+                        BezierSegment4.Point2 = listPoint[index * 3 + 1];
+                        BezierSegment4.Point3 = listPoint[index * 3 + 2];
+                    }
+                    index++;
+                }
 
+            }
+
+            PathFigure Fig = new PathFigure();
+            Fig.IsClosed = true;
+            Fig.StartPoint = BezierSegment1.Point1;
+            Fig.Segments.Add(BezierSegment1);
+            Fig.Segments.Add(BezierSegment2);
+            Fig.Segments.Add(BezierSegment3);
+            Fig.Segments.Add(BezierSegment4);
+            if (ShapeProperty.EndAngle < 360)
+            {
+                Fig.Segments.Add(line);
+            }
+            PathGeometry.Figures.Add(Fig);
+            return PathGeometry;
+        
+
+        }
+
+        private List<Point> getListPoint(double angle, double endangel,double R,double delta=30)
+        {
+            List<Point> listPoint = new List<Point>();
+            for (double a = angle; a <= endangel; a += delta)
+            {
+                Point p = new Point();
+                p.X = Math.Cos(a) * R + R;
+                p.Y = Math.Sin(a) * R;
+                listPoint.Add(p);
+            }
+            return listPoint;
+        }
 
     }
 
