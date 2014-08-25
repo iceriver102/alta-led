@@ -181,7 +181,7 @@ namespace Alta_LED.User_Control
             }
         }
         private GeometryCollection Geometries;
-      //  private GeometryGroup shapeGroup;
+        //  private GeometryGroup shapeGroup;
         private MediaBase mediaSource;
         private PlayerMode _player = PlayerMode.None;
         public PlayerMode ModePlayer
@@ -512,7 +512,7 @@ namespace Alta_LED.User_Control
                 this.setPosition(p.X - this.delta.X, p.Y - this.delta.Y);
             }
         }
-        private void AddShape(Shape shape, Geometry geometry=null)
+        private void AddShape(Shape shape, Geometry geometry = null)
         {
             if (this.Children == null)
             {
@@ -528,9 +528,9 @@ namespace Alta_LED.User_Control
                 this.Geometries.Add(geometry);
             }
             this.shapeGroup.Children = this.Geometries;
-           
-           
-           // this.layoutDraw.Children.Add(this.Children[this.Children.Count - 1]);
+
+
+            // this.layoutDraw.Children.Add(this.Children[this.Children.Count - 1]);
         }
         public void AddProperty(ShapeProperty @ShapeProperty)
         {
@@ -553,12 +553,13 @@ namespace Alta_LED.User_Control
                     EllipseGeometry.Center = new Point() { X = (ShapeProperty.Width) / 2, Y = (ShapeProperty.Height) / 2 };
                     EllipseGeometry.RadiusX = (ShapeProperty.Width) / 2;
                     EllipseGeometry.RadiusY = (ShapeProperty.Height) / 2;
-                    this.AddShape(shape,EllipseGeometry);
+                    this.AddShape(shape, EllipseGeometry);
                     break;
                 case ShapeChilden.Arc:
                     ArcProperty @ArcProperty = ShapeProperty as ArcProperty;
                     Arc tmpshape = new Arc();
-                    PathGeometry @PathGeometry = getPathGeometryArc(ArcProperty);                    
+
+                    PathGeometry @PathGeometry = getPathGeometryArc(ArcProperty);
                     tmpshape.ArcThickness = @ArcProperty.ArcThichness;
                     tmpshape.ArcThicknessUnit = ArcProperty.UnitType;
                     tmpshape.EndAngle = ArcProperty.EndAngle;
@@ -566,8 +567,8 @@ namespace Alta_LED.User_Control
                     tmpshape.setPosition(ArcProperty.Left, ArcProperty.Top);
                     tmpshape.Width = ShapeProperty.Width;
                     tmpshape.Height = ShapeProperty.Height;
-                   
-                    
+
+
                     this.AddShape(tmpshape, PathGeometry);
                     break;
                 case ShapeChilden.BlockArrow:
@@ -590,8 +591,8 @@ namespace Alta_LED.User_Control
                     RectangleGeometry @RectangleGeometry = new RectangleGeometry();
                     RectangleGeometry.RadiusX = RectangleProperty.RadiusX;
                     RectangleGeometry.RadiusY = RectangleProperty.RadiusY;
-                    
-                    this.AddShape(Rectangle,RectangleGeometry);
+
+                    this.AddShape(Rectangle, RectangleGeometry);
                     break;
                 case ShapeChilden.RegularPolygon:
                     RegularPolygonProperty @RegularPolygonProperty = ShapeProperty as RegularPolygonProperty;
@@ -637,7 +638,7 @@ namespace Alta_LED.User_Control
 
         }
 
-        
+
         public void UpdateDraw()
         {
             int count = this.Properties.Count;
@@ -655,7 +656,7 @@ namespace Alta_LED.User_Control
             Binding binding = new Binding();
             binding.Source = this.layoutDraw;
             BindingOperations.SetBinding(Mask, VisualBrush.VisualProperty, binding);
-           // Geometries = new  GeometryCollection();
+            // Geometries = new  GeometryCollection();
 
             this.video.OpacityMask = Mask;
 
@@ -672,76 +673,124 @@ namespace Alta_LED.User_Control
             PathGeometry PathGeometry = new PathGeometry();
             double R = ShapeProperty.Width / 2;
             Point I = new Point() { X = ShapeProperty.Width / 2, Y = ShapeProperty.Height / 2 };
-            double delta = 30;
             double AngelStart = ShapeProperty.StartAngle;
-            List<Point> listPoint = this.getListPoint(ShapeProperty.StartAngle, ShapeProperty.EndAngle, R, delta);
-            int index=0;
+            List<Point> listPoint = this.getListPoint(ShapeProperty.StartAngle, ShapeProperty.EndAngle, R);
+            PathFigure Fig = new PathFigure();
+            Fig.IsClosed = true;
+            Fig.StartPoint = listPoint[0];
+            int index = 0;
             BezierSegment BezierSegment1 = new BezierSegment();
             BezierSegment BezierSegment2 = new BezierSegment();
             BezierSegment BezierSegment3 = new BezierSegment();
             BezierSegment BezierSegment4 = new BezierSegment();
             LineSegment line = new LineSegment();
             line.Point = I;
-            if ( listPoint!=null && listPoint.Count > 0)
+            if (listPoint != null && listPoint.Count > 0)
             {
                 int count = listPoint.Count;
-                while (index < count / 3)
+                while (index < (count - 2) / 3)
                 {
-                   // int i = index;
+                    // int i = index;
                     if (index < 1)
                     {
-                        BezierSegment1.Point1 = listPoint[index * 3 + 0];
-                        BezierSegment1.Point2 = listPoint[index * 3 + 1];
-                        BezierSegment1.Point3 = listPoint[index * 3 + 2];
+                        BezierSegment1.Point1 = listPoint[index * 3 + 1];
+                        BezierSegment1.Point2 = listPoint[index * 3 + 2];
+                        BezierSegment1.Point3 = listPoint[index * 3 + 3];
+                        BezierSegment1.IsSmoothJoin = true;
+                        Fig.Segments.Add(BezierSegment1);
                     }
                     else if (index < 2)
                     {
-                        BezierSegment2.Point1 = listPoint[index * 3 + 0];
-                        BezierSegment2.Point2 = listPoint[index * 3 + 1];
-                        BezierSegment2.Point3 = listPoint[index * 3 + 2];
+                        BezierSegment2.Point1 = listPoint[index * 3 + 1];
+                        BezierSegment2.Point2 = listPoint[index * 3 + 2];
+                        BezierSegment2.Point3 = listPoint[index * 3 + 3];
+                        BezierSegment2.IsSmoothJoin = true;
+                        Fig.Segments.Add(BezierSegment2);
                     }
                     else if (index < 3)
                     {
-                        BezierSegment3.Point1 = listPoint[index * 3 + 0];
-                        BezierSegment3.Point2 = listPoint[index * 3 + 1];
-                        BezierSegment3.Point3 = listPoint[index * 3 + 2];
+                        BezierSegment3.Point1 = listPoint[index * 3 + 1];
+                        BezierSegment3.Point2 = listPoint[index * 3 + 2];
+                        BezierSegment3.Point3 = listPoint[index * 3 + 3];
+                        BezierSegment3.IsSmoothJoin = true;
+                        Fig.Segments.Add(BezierSegment3);
                     }
                     else if (index < 4)
                     {
-                        BezierSegment4.Point1 = listPoint[index * 3 + 0];
-                        BezierSegment4.Point2 = listPoint[index * 3 + 1];
-                        BezierSegment4.Point3 = listPoint[index * 3 + 2];
+
+                        BezierSegment4.Point1 = listPoint[index * 3 + 1];
+                        BezierSegment4.Point2 = listPoint[index * 3 + 2];
+                        BezierSegment4.Point3 = listPoint[index * 3 + 3];
+                        if (ShapeProperty.EndAngle >= 360)
+                        {
+                            BezierSegment4.IsSmoothJoin = true;
+                        }
+                        Fig.Segments.Add(BezierSegment4);
                     }
                     index++;
                 }
 
             }
 
-            PathFigure Fig = new PathFigure();
-            Fig.IsClosed = true;
-            Fig.StartPoint = BezierSegment1.Point1;
-            Fig.Segments.Add(BezierSegment1);
-            Fig.Segments.Add(BezierSegment2);
-            Fig.Segments.Add(BezierSegment3);
-            Fig.Segments.Add(BezierSegment4);
             if (ShapeProperty.EndAngle < 360)
             {
                 Fig.Segments.Add(line);
             }
             PathGeometry.Figures.Add(Fig);
             return PathGeometry;
-        
+
 
         }
 
-        private List<Point> getListPoint(double angle, double endangel,double R,double delta=30)
+        private List<Point> getListPoint(double angle, double endangel, double R)
         {
+          
+            double space = endangel.ToRadians() - angle.ToRadians();
+            int tmp = 0;
+            if (space < Math.PI / 2)
+            {
+                tmp = 3;
+            }
+            else if (space < Math.PI)
+            {
+                tmp = 6;
+            }
+            else if (space < 3 * Math.PI / 2)
+            {
+                tmp = 9;
+            }
+            else
+            {
+                tmp = 12;
+            }
+            double delta = space / (tmp + 1);
             List<Point> listPoint = new List<Point>();
-            for (double a = angle; a <= endangel; a += delta)
+            for (double a = angle.ToRadians();
+                a <= endangel.ToRadians(); a += delta)
             {
                 Point p = new Point();
-                p.X = Math.Cos(a) * R + R;
-                p.Y = Math.Sin(a) * R;
+                if (a <= Math.PI / 2)
+                {
+                    p.X = Math.Round(Math.Sin(a) * R + R, 5);
+                    p.Y = Math.Round(R - Math.Cos(a) * R, 5);
+                }
+                else if (a <= Math.PI)
+                {
+                    p.X = Math.Round(Math.Sin((Math.PI - a)) * R + R, 5);
+                    p.Y = Math.Round(Math.Cos((Math.PI - a)) * R + R, 5);
+
+                }
+                else if (a <= 3 * Math.PI / 2)
+                {
+                    p.X = Math.Round(R - Math.Cos((3 * Math.PI / 2 - a)) * R, 5);
+                    p.Y = Math.Round(R + Math.Sin((3 * Math.PI / 2 - a)) * R, 5);
+
+                }
+                else if (a <= 2 * Math.PI)
+                {
+                    p.X = Math.Round(R - Math.Sin((2 * Math.PI - a)) * R, 5);
+                    p.Y = Math.Round(R - Math.Cos((2 * Math.PI - a)) * R, 5);
+                }
                 listPoint.Add(p);
             }
             return listPoint;
