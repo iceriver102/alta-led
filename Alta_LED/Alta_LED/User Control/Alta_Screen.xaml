@@ -18,7 +18,15 @@
         <Rectangle x:Name="rect_21" Fill="White" Stroke="OrangeRed" StrokeThickness="1" Width="8" Height="8" Canvas.Bottom="0" Canvas.Left="146" MouseMove="resize_Center_Bottom" MouseLeftButtonDown="CaptrueMouse" MouseLeftButtonUp="EndResize"/>
         <Image x:Name="video"  Width="284" Height="284" Canvas.Left="8" Canvas.Top="8" Source="{Binding ElementName=videoPlayer, Path=VideoSource }" Stretch="Fill" MouseLeftButtonUp="Selected" MouseLeftButtonDown="BeginCaptrue" MouseMove="MoveItem"/>
         <Border x:Name="OutLine" Width="284" Height="284" BorderBrush="OrangeRed" BorderThickness="1" Canvas.Left="8" Canvas.Top="8"  >
-            <Canvas x:Name="layoutDraw" Background="Transparent" VerticalAlignment="Top" HorizontalAlignment="Left"  MouseLeftButtonUp="Selected" MouseLeftButtonDown="BeginCaptrue" MouseMove="MoveItem" Margin="1 1 0 0"/>
+            <Canvas x:Name="layoutDraw" Background="Transparent" VerticalAlignment="Top" HorizontalAlignment="Left" Width="284" Height="284"  MouseLeftButtonUp="Selected" MouseLeftButtonDown="BeginCaptrue" MouseMove="MoveItem" Margin="1 1 0 0">
+                <Path x:Name="mainShape" Stroke="Transparent" Fill="Orange">
+                    <Path.Data>
+                        <GeometryGroup x:Name="shapeGroup" FillRule="Nonzero">
+                            
+                        </GeometryGroup>
+                    </Path.Data>
+                </Path>
+            </Canvas>
         </Border>
     </Canvas>
 </UserControl>
