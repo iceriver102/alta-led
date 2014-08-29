@@ -18,6 +18,10 @@ namespace Alta_LED.Data.Init
 
     public static class StaticFunction
     {
+        public static double ToRadians(this double a)
+        {
+            return (Math.PI / 180) * a;
+        }
         public static void ScaleElement(this UIElement E, Size scale)
         {
             E.RenderTransformOrigin = new Point(0.5, 0.5);
