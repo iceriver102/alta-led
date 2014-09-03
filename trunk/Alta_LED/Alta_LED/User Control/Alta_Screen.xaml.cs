@@ -761,44 +761,17 @@ namespace Alta_LED.User_Control
         private PathGeometry getPathGeometry(ArcProperty ShapeProperty)
         {
             PathGeometry PathGeometry = new PathGeometry();
+
             double R = ShapeProperty.Width / 2;
             Point I = new Point() { X = ShapeProperty.Width / 2, Y = ShapeProperty.Height / 2 };
             double AngelStart = ShapeProperty.StartAngle;
            // List<Point> listPoint = this.getListPoint(ShapeProperty.StartAngle, ShapeProperty.EndAngle, R);
             PathFigure Fig = new PathFigure();
             Fig.IsClosed = true;
-            Fig.StartPoint = new Point(99.5, 50);
+           
             
           //  int index = 0;
-            BezierSegment BezierSegment1 = new BezierSegment();
-            BezierSegment1.IsSmoothJoin = true;
-            BezierSegment1.Point1 = new Point(99.5, 70.020881652832);
-            BezierSegment1.Point2 = new Point(87.4397125244141, 88.0703735351563);
-            BezierSegment1.Point3 = new Point(68.9428329467773, 95.7320327758789);
-            Fig.Segments.Add(BezierSegment1);
-
-            BezierSegment BezierSegment2 = new BezierSegment();
-            BezierSegment2.IsSmoothJoin = true;
-            BezierSegment2.Point1 = new Point(50.4459457397461, 103.393692016602);
-            BezierSegment2.Point2 = new Point(29.1551189422607, 99.1586837768555);
-            BezierSegment2.Point3 = new Point(14.9982175827026, 85.0017852783203);
-            Fig.Segments.Add(BezierSegment2);
-
-            BezierSegment BezierSegment3 = new BezierSegment();
-            BezierSegment3.IsSmoothJoin = true;
-            BezierSegment3.Point1 = new Point(0.841317534446716, 70.8448867797852);
-            BezierSegment3.Point2 = new Point(-3.3936882019043, 49.5540542602539);
-            BezierSegment3.Point3 = new Point(4.26796770095825, 31.0571727752686);
-            Fig.Segments.Add(BezierSegment3);
-
-            BezierSegment BezierSegment4 = new BezierSegment();
-            BezierSegment4.Point1 = new Point(11.9296264648438, 12.5602922439575);
-            BezierSegment4.Point2 = new Point(29.979118347168, 0.5);
-            BezierSegment4.Point3 = new Point(50, 0.5);
-            Fig.Segments.Add(BezierSegment4);
-
-            LineSegment line = new LineSegment();
-            line.Point = I;
+          
             /*
             if (listPoint != null && listPoint.Count > 0)
             {
@@ -846,10 +819,88 @@ namespace Alta_LED.User_Control
                 }
 
             }*/
-
+            BezierSegment BezierSegment1 = new BezierSegment();
+            BezierSegment BezierSegment2 = new BezierSegment();
+            BezierSegment BezierSegment3 = new BezierSegment();
+            BezierSegment BezierSegment4 = new BezierSegment();
+            LineSegment line = new LineSegment();
             if (ShapeProperty.EndAngle-ShapeProperty.StartAngle < 360)
             {
+                Fig.StartPoint = new Point(99.5, 50);
+               // BezierSegment BezierSegment1 = new BezierSegment();
+                BezierSegment1.IsSmoothJoin = true;
+                BezierSegment1.Point1 = new Point(99.5, 70.020881652832);
+                BezierSegment1.Point2 = new Point(87.4397125244141, 88.0703735351563);
+                BezierSegment1.Point3 = new Point(68.9428329467773, 95.7320327758789);
+                Fig.Segments.Add(BezierSegment1);
+
+               
+                BezierSegment2.IsSmoothJoin = true;
+                BezierSegment2.Point1 = new Point(50.4459457397461, 103.393692016602);
+                BezierSegment2.Point2 = new Point(29.1551189422607, 99.1586837768555);
+                BezierSegment2.Point3 = new Point(14.9982175827026, 85.0017852783203);
+                Fig.Segments.Add(BezierSegment2);
+
+              
+                BezierSegment3.IsSmoothJoin = true;
+                BezierSegment3.Point1 = new Point(0.841317534446716, 70.8448867797852);
+                BezierSegment3.Point2 = new Point(-3.3936882019043, 49.5540542602539);
+                BezierSegment3.Point3 = new Point(4.26796770095825, 31.0571727752686);
+                Fig.Segments.Add(BezierSegment3);
+
+               
+                BezierSegment4.Point1 = new Point(11.9296264648438, 12.5602922439575);
+                BezierSegment4.Point2 = new Point(29.979118347168, 0.5);
+                BezierSegment4.Point3 = new Point(50, 0.5);
+                Fig.Segments.Add(BezierSegment4);
+                
+                if (ShapeProperty.UnitType == Microsoft.Expression.Media.UnitType.Percent)
+                {
+                    line.Point = new Point(I.X,I.Y-I.Y*ShapeProperty.ArcThichness);
+                }
+                else
+                {
+                    if(I.Y<ShapeProperty.ArcThichness)
+                    {
+                        I.Y=I.Y-ShapeProperty.ArcThichness;
+                    }
+                    line.Point = new Point(I.X, I.Y);
+                }               
+               
                 Fig.Segments.Add(line);
+            }
+            else
+            {
+                Fig.StartPoint = new Point(50, 0.5);
+                
+                BezierSegment1.IsSmoothJoin = true;
+                BezierSegment1.Point1 = new Point(77.3380966186523, 0.5);
+                BezierSegment1.Point2 = new Point(99.5, 22.6619071960449);
+                BezierSegment1.Point3 = new Point(99.5, 50.0000038146973);
+                Fig.Segments.Add(BezierSegment1);
+
+
+                BezierSegment2.Point1 = new Point(99.5, 77.3380966186523);
+                BezierSegment2.Point2 = new Point(77.3380966186523, 99.5 );
+                BezierSegment2.Point3 = new Point(50, 99.5);
+                Fig.Segments.Add(BezierSegment2);
+
+              //  BezierSegment BezierSegment3 = new BezierSegment();
+                BezierSegment3.IsSmoothJoin = true;
+                BezierSegment3.Point1 = new Point(22.6619033813477, 99.5);
+                BezierSegment3.Point2 = new Point(0.5, 77.3380966186523);
+                BezierSegment3.Point3 = new Point(0.5, 49.9999961853027);
+                Fig.Segments.Add(BezierSegment3);
+
+              //  BezierSegment BezierSegment4 = new BezierSegment();
+                BezierSegment4.Point1 = new Point(0.5, 22.661901473999);
+                BezierSegment4.Point2 = new Point(22.6619033813477, 0.5);
+                BezierSegment4.Point3 = new Point(50, 0.5);
+                Fig.Segments.Add(BezierSegment4);
+            }
+            if (ShapeProperty.ArcThichness < 1 && ShapeProperty.UnitType!= Microsoft.Expression.Media.UnitType.Percent)
+            {
+
             }
             PathGeometry.Figures.Add(Fig);
             return PathGeometry;
