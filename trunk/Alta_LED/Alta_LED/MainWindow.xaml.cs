@@ -310,9 +310,10 @@ namespace Alta_LED
                     break;
                 case Key.E:
                     String xaml = XamlWriter.Save(this.main_layout);
-                    MessageBox.Show(xaml);
-
-                    
+                    MessageBox.Show(xaml);                    
+                    break;
+                case Key.L:
+                    repeat_click(null,null);
                     break;
             }
         }
@@ -330,6 +331,7 @@ namespace Alta_LED
                         Border_Content tmp = this.main_layout.Children[i] as Border_Content;
                         if (tmp.isSelected)
                         {
+                           
                             tmp.MediaSource = file;
                             //tmp.ModePlayer = PlayerMode.Play;
                         }
@@ -700,6 +702,24 @@ namespace Alta_LED
               }
             if(flag)
               this.main_layout.Children.Add(Screen);
+        }
+
+        private void repeat_click(object sender, RoutedEventArgs e)
+        {
+            int count = this.main_layout.Children.Count;
+            for (int i = 0; i < count; i++)
+            {
+                if (this.main_layout.Children[i] is Border_Content)
+                {
+                    Border_Content tmp = this.main_layout.Children[i] as Border_Content;
+                    if (tmp.isSelected)
+                    {
+                        tmp.repeatMedia = !tmp.repeatMedia;
+                        return;
+                    }
+                }
+            }
+            
         }
 
         
