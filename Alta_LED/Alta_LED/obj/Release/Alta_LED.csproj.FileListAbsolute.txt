@@ -303,3 +303,78 @@ E:\Projects\Google Projects\Alta_LED\Alta_LED\obj\Release\User Control\Grid_Cont
 E:\Projects\Google Projects\Alta_LED\Alta_LED\obj\Release\Alta_LED.g.resources
 E:\Projects\Google Projects\Alta_LED\Alta_LED\obj\Release\Alta_LED.Properties.Resources.resources
 E:\Projects\Google Projects\Alta_LED\Alta_LED\obj\Release\Alta_LED.csproj.GenerateResource.Cache
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\Alta_LED.exe.config
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\obj\Release\Alta_LED.exe
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\obj\Release\Alta_LED.pdb
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\Alta_LED.exe
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\Alta_LED.pdb
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\Microsoft.Expression.Drawing.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\Microsoft.Expression.Effects.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\Microsoft.Expression.Interactions.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\System.Windows.Interactivity.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\de\Microsoft.Expression.Drawing.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\es\Microsoft.Expression.Drawing.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\fr\Microsoft.Expression.Drawing.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\it\Microsoft.Expression.Drawing.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\ja\Microsoft.Expression.Drawing.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\ko\Microsoft.Expression.Drawing.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\ru\Microsoft.Expression.Drawing.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\zh-Hans\Microsoft.Expression.Drawing.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\zh-Hant\Microsoft.Expression.Drawing.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\de\Microsoft.Expression.Effects.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\es\Microsoft.Expression.Effects.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\fr\Microsoft.Expression.Effects.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\it\Microsoft.Expression.Effects.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\ja\Microsoft.Expression.Effects.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\ko\Microsoft.Expression.Effects.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\ru\Microsoft.Expression.Effects.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\zh-Hans\Microsoft.Expression.Effects.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\zh-Hant\Microsoft.Expression.Effects.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\de\Microsoft.Expression.Interactions.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\en\Microsoft.Expression.Interactions.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\es\Microsoft.Expression.Interactions.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\fr\Microsoft.Expression.Interactions.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\it\Microsoft.Expression.Interactions.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\ja\Microsoft.Expression.Interactions.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\ko\Microsoft.Expression.Interactions.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\ru\Microsoft.Expression.Interactions.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\zh-Hans\Microsoft.Expression.Interactions.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\zh-Hant\Microsoft.Expression.Interactions.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\de\System.Windows.Interactivity.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\en\System.Windows.Interactivity.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\es\System.Windows.Interactivity.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\fr\System.Windows.Interactivity.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\it\System.Windows.Interactivity.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\ja\System.Windows.Interactivity.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\ko\System.Windows.Interactivity.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\ru\System.Windows.Interactivity.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\zh-Hans\System.Windows.Interactivity.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\bin\Release\zh-Hant\System.Windows.Interactivity.resources.dll
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\obj\Release\Alta_LED.csprojResolveAssemblyReference.cache
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\obj\Release\Data\Themes\Button_Delete.baml
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\obj\Release\Data\Themes\Button_Add.baml
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\obj\Release\Data\Themes\Button_Close.baml
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\obj\Release\Data\Themes\Button_Setting.baml
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\obj\Release\Data\Themes\SimpleTemplate.baml
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\obj\Release\Simple Styles.baml
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\obj\Release\User Control\alta_Screen.baml
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\obj\Release\User Control\Border_Content.baml
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\obj\Release\User Control\ItemTemplate.baml
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\obj\Release\User Control\Item_Toolxaml.baml
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\obj\Release\App.baml
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\obj\Release\Data\Themes\SimpleTemplate.g.cs
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\obj\Release\MainWindow.g.cs
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\obj\Release\User Control\alta_Screen.g.cs
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\obj\Release\User Control\Border_Content.g.cs
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\obj\Release\User Control\Grid_Content.g.cs
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\obj\Release\User Control\ItemTemplate.g.cs
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\obj\Release\User Control\Item_Toolxaml.g.cs
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\obj\Release\App.g.cs
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\obj\Release\GeneratedInternalTypeHelper.g.cs
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\obj\Release\Alta_LED_MarkupCompile.cache
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\obj\Release\Alta_LED_MarkupCompile.lref
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\obj\Release\MainWindow.baml
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\obj\Release\User Control\Grid_Content.baml
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\obj\Release\Alta_LED.g.resources
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\obj\Release\Alta_LED.Properties.Resources.resources
+E:\Giang.Phan\Projects\Alta_LED\Alta_LED\obj\Release\Alta_LED.csproj.GenerateResource.Cache

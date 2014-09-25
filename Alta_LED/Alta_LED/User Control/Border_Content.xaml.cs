@@ -174,7 +174,7 @@ namespace Alta_LED.User_Control
 
                     this.videoPlayer.PositionChanged += vlcControl1_PositionChanged;
                     this.videoPlayer.Play();
-                    
+
                 }
                 else if (value == PlayerMode.Pause)
                 {
@@ -190,7 +190,7 @@ namespace Alta_LED.User_Control
                         this.videoPlayer.Stop();
                     }
                 }
-                
+
             }
         }
 
@@ -198,7 +198,7 @@ namespace Alta_LED.User_Control
         {
             this.videoPlayer.AudioProperties.IsMute = this.isMute;
         }
-        
+
         private string _media = "";
         public String MediaSource
         {
@@ -208,16 +208,37 @@ namespace Alta_LED.User_Control
             }
             set
             {
+                this.videoPlayer.Stop();
+                if (this.videoPlayer.Media != null)
+                    this.videoPlayer.Media.Dispose();
                 this._media = value;
+                this.videoPlayer.Medias.Clear();
                 mediaSource = new PathMedia(value);
                 mediaSource.ParsedChanged += mediaSource_ParsedChanged;
+                mediaSource.StateChanged += mediaSource_StateChanged;
 
+            }
+        }
+        TimeSpan durationMedia;
+
+        void mediaSource_StateChanged(MediaBase sender, Vlc.DotNet.Core.VlcEventArgs<Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.States> e)
+        {
+            if (e.Data == Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.States.Paused)
+            {
+                if (this.repeatMedia)
+                {
+                    if (sender.Duration.TotalSeconds - this.durationMedia.TotalSeconds < 1)
+                    {
+                        this.videoPlayer.Stop();
+                        this.videoPlayer.Play();
+                    }
+                }
             }
         }
 
         void mediaSource_ParsedChanged(MediaBase sender, Vlc.DotNet.Core.VlcEventArgs<int> e)
         {
-
+            this.durationMedia = TimeSpan.Zero;
         }
         private Point delta;
         private bool _isSelected = false;
@@ -233,7 +254,7 @@ namespace Alta_LED.User_Control
                 this._isSelected = value;
                 if (value)
                 {
-                    this.OutLine.BorderBrush = Brushes.LightSeaGreen;                   
+                    this.OutLine.BorderBrush = Brushes.LightSeaGreen;
                 }
                 else
                 {
@@ -251,7 +272,7 @@ namespace Alta_LED.User_Control
         }
         [NonSerialized]
         private Shape _child;
-       
+
         public Shape Child
         {
             get
@@ -266,10 +287,10 @@ namespace Alta_LED.User_Control
                 {
                     //value.setPosition(this.Property.Left, this.Property.Top);
                 }
-                value.Width = this.RealWidth-4;
-                value.Height = this.RealHeight-4;
+                value.Width = this.RealWidth - 4;
+                value.Height = this.RealHeight - 4;
                 this._child = value;
-                
+
                 VisualBrush Mask = new VisualBrush();
                 Binding binding = new Binding();
                 binding.Source = value;
@@ -287,7 +308,7 @@ namespace Alta_LED.User_Control
             {
                 return this.Width - 16;
             }
-           private set
+            private set
             {
                 if (value < 4)
                     return;
@@ -331,8 +352,16 @@ namespace Alta_LED.User_Control
         public Border_Content()
         {
             InitializeComponent();
+            this.videoPlayer.TimeChanged += videoPlayer_TimeChanged;
             this.zIndex = 100;
             this.isMute = false;
+        }
+
+        void videoPlayer_TimeChanged(VlcControl sender, Vlc.DotNet.Core.VlcEventArgs<TimeSpan> e)
+        {
+            if (this.videoPlayer.Media == null)
+                return;
+            this.durationMedia = e.Data;
         }
 
         #region resize
@@ -451,7 +480,7 @@ namespace Alta_LED.User_Control
                 if (this.selectEvent != null)
                 {
                     this.selectEvent(this, this.isSelected);
-                }                
+                }
             }
             this.layoutDraw.ReleaseMouseCapture();
         }
@@ -472,8 +501,24 @@ namespace Alta_LED.User_Control
             {
                 Point p = e.GetPosition(this.Parents);
                 this.setPosition(p.X - this.delta.X, p.Y - this.delta.Y);
-                this.Property.Top = p.Y-this.delta.Y;
-                this.Property.Left = p.X-this.delta.X;
+                this.Property.Top = p.Y - this.delta.Y;
+                this.Property.Left = p.X - this.delta.X;
+            }
+        }
+        private bool repeat = true;
+        public bool repeatMedia
+        {
+            get
+            {
+                return this.repeat;
+            }
+            set
+            {
+                if (value)
+                {
+                   
+                }
+                this.repeat = value;
             }
         }
     }

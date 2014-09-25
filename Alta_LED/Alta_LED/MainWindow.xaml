@@ -129,7 +129,8 @@
             <Button  Content="&#xf160;" Grid.Column="13" FontSize="22" Style="{DynamicResource SimpleButtonFontIcon}" Background="Transparent" Foreground="White" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="32" Height="32" Click="Change_zindex_asc" Margin="12,0" />
             <Button x:Name="btn_Volume" Content="&#xf028;" Grid.Column="14" FontSize="22" Style="{DynamicResource SimpleButtonFontIcon}" Background="Transparent" Foreground="White" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="32" Height="32" Click="Change_Volume" Margin="12,0" />
             <Button x:Name="btn_merge" Content="&#xf0c1;" Grid.Column="15" FontSize="22" Style="{DynamicResource SimpleButtonFontIcon}" Background="Transparent" Foreground="White" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="32" Height="32" Click="Create_screen" Margin="11,0" />
-
+            <Button x:Name="btn_repeat" Content="&#xf01e;" Grid.Column="16" FontSize="22" Style="{DynamicResource SimpleButtonFontIcon}" Background="Transparent" Foreground="White" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="32" Height="32" Click="repeat_click" Margin="11,0" />
+           
 
         </Grid>
         <Grid  Height="624" Canvas.Top="50" Width="165">
